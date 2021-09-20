@@ -30,7 +30,7 @@ export default function Register() {
             photoURL: Math.floor(Math.random() * 5) + 1,
           })
           .then(() => {
-            history.push(ROUTES.SEARCH);
+            history.push(ROUTES.WATCH);
           })
       )
       .catch((error) => {

@@ -22,7 +22,7 @@ export default function SignIn() {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        history.push(ROUTES.SEARCH);
+        history.push(ROUTES.WATCH);
       })
       .catch((error) => {
         setEmail("");

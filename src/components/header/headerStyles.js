@@ -12,7 +12,7 @@ export const Background = styled.div`
       rgba(0, 0, 0, 0.9)
     ),
     url(${({ src }) =>
-        src ? `../images/misc/${src}.jpg` : "../images/misc/cat-header-bg.png"})
+        src ? `../images/misc/${src}` : "../images/misc/cat-header-bg.png"})
       top left / cover no-repeat;
 
   @media (max-width: 1100px) {
@@ -43,6 +43,7 @@ export const Link = styled.p`
   margin-right: 30px;
   font-weight: ${({ active }) => (active === "true" ? "700" : "normal")};
   cursor: pointer;
+  z-index: 100;
 
   &:hover {
     font-weight: bold;
@@ -61,7 +62,7 @@ export const Group = styled.div`
 export const ButtonLink = styled(ReachRouterLink)`
   display: block;
   background-color: #e50914;
-  width: 84px;
+  width: 100px;
   height: fit-content;
   color: white;
   border: 0;
@@ -79,7 +80,8 @@ export const ButtonLink = styled(ReachRouterLink)`
 export const Picture = styled.button`
   background: url(${({ src }) => src});
   background-size: contain;
-  border: 0;
+  border: 1px solid black;
+  border-radius: 2px;
   width: 32px;
   height: 32px;
   cursor: pointer;
@@ -130,6 +132,7 @@ export const Profile = styled.div`
   align-items: center;
   margin-left: 20px;
   position: relative;
+  z-index: 100;
 
   button {
     cursor: pointer;
@@ -142,7 +145,7 @@ export const Profile = styled.div`
 `;
 
 export const Feature = styled(Container)`
-  padding: 150px 0 500px 0;
+  padding: 100px 0 400px 0;
   flex-direction: column;
   align-items: normal;
   width: 50%;
@@ -197,5 +200,55 @@ export const PlayButton = styled.button`
   &:hover {
     background-color: #ff1e1e;
     color: white;
+  }
+`;
+
+export const SearchInput = styled.input`
+  background-color: rgba(64, 64, 64, 0.5);
+  color: white;
+  border: 1px solid white;
+  transition: width 0.5s;
+  height: 30px;
+  font-size: 14px;
+  border-radius: 4px;
+  margin-left: ${({ active }) => (active === true ? "10px" : "0")};
+  padding: ${({ active }) => (active === true ? "0 10px" : "0")};
+  opacity: ${({ active }) => (active === true ? "1" : "0")};
+  width: ${({ active }) => (active === true ? "200px" : "0px")};
+
+  &:focus {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+`;
+
+export const Search = styled.div`
+  display: flex;
+  align-items: center;
+
+  svg {
+    color: white;
+    cursor: pointer;
+  }
+
+  @media (max-width: 700px) {
+    display: none;
+  }
+`;
+
+export const SearchIcon = styled.button`
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  height: 32px;
+  width: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    filter: brightness(0) invert(1);
+    width: 16px;
   }
 `;

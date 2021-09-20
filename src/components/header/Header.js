@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link as ReachRouterLink } from "react-router-dom";
 import {
   Container,
@@ -14,6 +14,9 @@ import {
   Text,
   Feature,
   Logo,
+  Search,
+  SearchIcon,
+  SearchInput,
 } from "./headerStyles";
 
 export default function Header({ bg = true, children, ...restProps }) {
@@ -51,7 +54,7 @@ Header.Feature = function HeaderFeature({ children, ...restProps }) {
 };
 
 Header.Picture = function HeaderPicture({ src, ...restProps }) {
-  return <Picture {...restProps} src={`/images/users/${src}.png`} />;
+  return <Picture {...restProps} src={`/images/users/${src}.jpg`} />;
 };
 
 Header.Dropdown = function HeaderDropdown({ children, ...restProps }) {
@@ -79,4 +82,26 @@ Header.Text = function HeaderText({ children, ...restProps }) {
 
 Header.ButtonLink = function HeaderButtonLink({ children, ...restProps }) {
   return <ButtonLink {...restProps}>{children}</ButtonLink>;
+};
+
+Header.Search = function HeaderSearch({
+  searchTerm,
+  setSearchTerm,
+  ...restProps
+}) {
+  const [searchActive, setSearchActive] = useState(false);
+
+  return (
+    <Search {...restProps}>
+      <SearchIcon onClick={() => setSearchActive(!searchActive)}>
+        <img src="/images/icons/search.png" alt="Search" />
+      </SearchIcon>
+      <SearchInput
+        value={searchTerm}
+        onChange={({ target }) => setSearchTerm(target.value)}
+        placeholder="Search shows"
+        active={searchActive}
+      />
+    </Search>
+  );
 };

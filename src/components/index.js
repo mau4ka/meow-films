@@ -5,4 +5,6 @@ export { default as FastRegForm } from "./fastRegForm/FastRegForm";
 export { default as Header } from "./header/Header";
 export { default as HeaderText } from "./headerText/HeaderText";
 export { default as SignInForm } from "./signInForm/SignInForm";
+export { default as Loading } from "./loading/Loading";
+export { default as Cards } from "./cards/Cards";
 
