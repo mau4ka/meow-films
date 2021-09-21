@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import * as axios from "axios";
+import { ContextShow } from "../context/contextShow";
 
 export default function useContent(category) {
   const [content, setContent] = useState([]);
+  const [contextShow, setContextShow] = useContext(ContextShow);
 
   useEffect(async () => {
     await axios
@@ -11,13 +13,13 @@ export default function useContent(category) {
         const shows = response.data;
         console.log(shows);
 
-        setContent({ shows });
+        setContent(shows);
       })
       .catch((error) => {
         console.log(error.message);
       });
-  }, []);
-  console.log({ [category]: content });
+  }, [contextShow]);
+  console.log(content);
 
-  return { [category]: content };
+  return { content };
 }

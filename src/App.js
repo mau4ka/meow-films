@@ -7,6 +7,7 @@ import { Watch } from "./pages";
 import { SignIn } from "./pages";
 import { IsUserRedirect, ProtectedRoute } from "./helpers/routes";
 import useAuthListener from "./hooks/use-auth-listener";
+import Show from "./pages/show";
 
 function App() {
   const { user } = useAuthListener();
@@ -31,6 +32,11 @@ function App() {
         <ProtectedRoute user={user} path={ROUTES.WATCH}>
           <Watch />
         </ProtectedRoute>
+
+        <ProtectedRoute user={user} path={ROUTES.SHOW + "/:url"}>
+          <Show />
+        </ProtectedRoute>
+
         <IsUserRedirect
           user={user}
           loggedInPath={ROUTES.WATCH}

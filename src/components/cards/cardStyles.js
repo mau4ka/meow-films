@@ -7,6 +7,7 @@ export const Title = styled.p`
   margin-left: 56px;
   margin-right: 56px;
   margin-top: 0;
+  text-align: center;
 `;
 
 export const Container = styled.div`
@@ -18,6 +19,19 @@ export const Group = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+`;
+
+export const GroupSpace = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 `;
 
 export const Item = styled.div`
@@ -33,7 +47,7 @@ export const Item = styled.div`
 `;
 
 export const SubTitle = styled.p`
-  font-size: 12px;
+  font-size: 15px;
   color: white;
   font-weight: bold;
   margin-top: 0;
@@ -57,5 +71,15 @@ export const Image = styled.img`
   cursor: pointer;
   height: 18rem;
   padding: 0;
+  margin: 0;
+`;
+
+export const Heart = styled.img`
+  border: 0;
+  // width: 100%;
+  // max-width: 305px;
+  cursor: pointer;
+  // height: 18rem;
+  // padding-left: 150px;
   margin: 0;
 `;

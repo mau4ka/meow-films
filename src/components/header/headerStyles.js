@@ -203,6 +203,11 @@ export const PlayButton = styled.button`
   }
 `;
 
+export const SearchForm = styled.form`
+  display: flex;
+  width: ${({ active }) => (active === true ? "210px" : "0px")};
+`;
+
 export const SearchInput = styled.input`
   background-color: rgba(64, 64, 64, 0.5);
   color: white;
@@ -211,7 +216,6 @@ export const SearchInput = styled.input`
   height: 30px;
   font-size: 14px;
   border-radius: 4px;
-  margin-left: ${({ active }) => (active === true ? "10px" : "0")};
   padding: ${({ active }) => (active === true ? "0 10px" : "0")};
   opacity: ${({ active }) => (active === true ? "1" : "0")};
   width: ${({ active }) => (active === true ? "200px" : "0px")};
@@ -219,6 +223,20 @@ export const SearchInput = styled.input`
   &:focus {
     background-color: rgba(0, 0, 0, 0.8);
   }
+`;
+
+export const SearchButton = styled.button`
+  background-color: rgba(64, 64, 64, 0.5);
+  color: white;
+  border: 1px solid white;
+  transition: width 0.5s;
+  height: 30px;
+  font-size: 14px;
+  border-radius: 4px;
+  margin-left: ${({ active }) => (active === true ? "5px" : "0")};
+  padding: ${({ active }) => (active === true ? "0 5px" : "0")};
+  opacity: ${({ active }) => (active === true ? "1" : "0")};
+  width: ${({ active }) => (active === true ? "20px" : "0px")};
 `;
 
 export const Search = styled.div`
@@ -230,9 +248,19 @@ export const Search = styled.div`
     cursor: pointer;
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 600px) {
     display: none;
   }
+`;
+
+export const Select = styled.select`
+  background-color: rgba(64, 64, 64, 0.5);
+  color: white;
+  border: 1px solid white;
+  transition: width 0.5s;
+  height: 30px;
+  font-size: 14px;
+  border-radius: 4px;
 `;
 
 export const SearchIcon = styled.button`

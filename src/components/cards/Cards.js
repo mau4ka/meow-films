@@ -8,6 +8,9 @@ import {
   Text,
   Item,
   Image,
+  Column,
+  Heart,
+  GroupSpace,
 } from "./cardStyles";
 
 export default function Cards({ children, ...restProps }) {
@@ -16,6 +19,14 @@ export default function Cards({ children, ...restProps }) {
 
 Cards.Group = function CardsGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
+};
+
+Cards.GroupSpace = function CardsGroup({ children, ...restProps }) {
+  return <GroupSpace {...restProps}>{children}</GroupSpace>;
+};
+
+Cards.Column = function CardsColumn({ children, ...restProps }) {
+  return <Column {...restProps}>{children}</Column>;
 };
 
 Cards.Title = function CardsTitle({ children, ...restProps }) {
@@ -36,4 +47,8 @@ Cards.Item = function CardsItem({ item, children, ...restProps }) {
 
 Cards.Image = function CardsImage({ ...restProps }) {
   return <Image {...restProps} />;
+};
+
+Cards.Heart = function CardsImage({ ...restProps }) {
+  return <Heart {...restProps} />;
 };

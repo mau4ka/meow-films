@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { Link as ReachRouterLink } from "react-router-dom";
+import { ContextShow } from "../../context/contextShow";
 import {
   Container,
   Group,
@@ -17,6 +19,9 @@ import {
   Search,
   SearchIcon,
   SearchInput,
+  SearchForm,
+  SearchButton,
+  Select,
 } from "./headerStyles";
 
 export default function Header({ bg = true, children, ...restProps }) {
@@ -84,6 +89,10 @@ Header.ButtonLink = function HeaderButtonLink({ children, ...restProps }) {
   return <ButtonLink {...restProps}>{children}</ButtonLink>;
 };
 
+Header.Select = function HeaderButtonLink({ children, ...restProps }) {
+  return <Select {...restProps}>{children}</Select>;
+};
+
 Header.Search = function HeaderSearch({
   searchTerm,
   setSearchTerm,
@@ -91,17 +100,30 @@ Header.Search = function HeaderSearch({
 }) {
   const [searchActive, setSearchActive] = useState(false);
 
+  const [contextShow, setContextShow] = useContext(ContextShow);
+
   return (
     <Search {...restProps}>
       <SearchIcon onClick={() => setSearchActive(!searchActive)}>
         <img src="/images/icons/search.png" alt="Search" />
       </SearchIcon>
-      <SearchInput
-        value={searchTerm}
-        onChange={({ target }) => setSearchTerm(target.value)}
-        placeholder="Search shows"
-        active={searchActive}
-      />
+      <SearchForm active={searchActive}>
+        <SearchInput
+          value={searchTerm}
+          onChange={({ target }) => setSearchTerm(target.value)}
+          placeholder="Search shows"
+          active={searchActive}
+        />
+        <SearchButton
+          active={searchActive}
+          onClick={(e) => {
+            e.preventDefault();
+            setContextShow(searchTerm);
+          }}
+        >
+          &gt;
+        </SearchButton>
+      </SearchForm>
     </Search>
   );
 };
