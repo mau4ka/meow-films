@@ -6,6 +6,8 @@ import { FirebaseContext } from "../context/firebase";
 import { FooterContainer } from "./FooterContainer";
 import { CardsContainer } from "./CardsContainer";
 import { ContextShow } from "../context/contextShow";
+import { getDatabase, ref, set } from "firebase/database";
+import useSetLike from "../hooks/use-setLike";
 
 export function WatchContainer() {
   const [contextShow, setContextShow] = useState("cat");
@@ -15,12 +17,15 @@ export function WatchContainer() {
 
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
+  console.log(user);
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   }, []);
+
+  
 
   return (
     <>

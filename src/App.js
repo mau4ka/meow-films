@@ -8,6 +8,7 @@ import { SignIn } from "./pages";
 import { IsUserRedirect, ProtectedRoute } from "./helpers/routes";
 import useAuthListener from "./hooks/use-auth-listener";
 import Show from "./pages/show";
+import UserPage from "./pages/user";
 
 function App() {
   const { user } = useAuthListener();
@@ -35,6 +36,10 @@ function App() {
 
         <ProtectedRoute user={user} path={ROUTES.SHOW + "/:url"}>
           <Show />
+        </ProtectedRoute>
+
+        <ProtectedRoute user={user} path={ROUTES.USER}>
+          <UserPage />
         </ProtectedRoute>
 
         <IsUserRedirect

@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Cards } from "../components";
 import useContent from "../hooks/use-api-category";
 import no_image from "../no_image.png";
 import * as ROUTES from "../constants/routes";
 import heart from "../heart.svg";
+import useSetLike from "../hooks/use-setLike";
 
 export function CardsContainer({ name }) {
+  const [like, setLike] = useState(null);
+  useSetLike(like);
   let category = useContent(name);
   console.log(name);
+
   return (
     <Cards>
       <Cards.Title>{name}</Cards.Title>
@@ -38,7 +42,11 @@ export function CardsContainer({ name }) {
                   <Cards.Text>Language: {item.show.language}</Cards.Text>
                   <Cards.Text>Status: {item.show.status}</Cards.Text>
                 </Cards.Column>
-                <Cards.Heart src={heart} alt="heart"></Cards.Heart>
+                <Cards.Heart
+                  onClick={() => setLike(item.show.id)}
+                  src={heart}
+                  alt="heart"
+                ></Cards.Heart>
               </Cards.GroupSpace>
             </Cards.Item>
           ))
