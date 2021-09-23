@@ -87,6 +87,13 @@ export const Picture = styled.button`
   cursor: pointer;
 `;
 
+export const PictureHome = styled.img`
+  width: 32px;
+  height: 32px;
+  margin-left: 5px;
+  cursor: pointer;
+`;
+
 export const Dropdown = styled.div`
   display: none;
   position: absolute;

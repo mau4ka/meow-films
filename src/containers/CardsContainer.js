@@ -4,13 +4,26 @@ import useContent from "../hooks/use-api-category";
 import no_image from "../no_image.png";
 import * as ROUTES from "../constants/routes";
 import heart from "../heart.svg";
+import heartLiked from "../heartLiked.svg";
 import useSetLike from "../hooks/use-setLike";
 
-export function CardsContainer({ name }) {
+
+export function CardsContainer({ name, liked }) {
   const [like, setLike] = useState(null);
   useSetLike(like);
+
   let category = useContent(name);
   console.log(name);
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
+
 
   return (
     <Cards>
@@ -41,12 +54,26 @@ export function CardsContainer({ name }) {
                   <Cards.SubTitle>{item.show.name}</Cards.SubTitle>
                   <Cards.Text>Language: {item.show.language}</Cards.Text>
                   <Cards.Text>Status: {item.show.status}</Cards.Text>
+                  {liked !== null &&
+                  liked.likesId &&
+                  liked.likesId.indexOf(item.show.id) !== -1 ? (
+                    <Cards.Text>You can dislike</Cards.Text>
+                  ) : (
+                    <Cards.Text>You can like</Cards.Text>
+                  )}
                 </Cards.Column>
+                
                 <Cards.Heart
-                  onClick={() => setLike(item.show.id)}
-                  src={heart}
-                  alt="heart"
-                ></Cards.Heart>
+                    onClick={() => setLike(item.show)}
+                    src={liked !== null &&
+                      liked.likesId &&
+                      liked.likesId.indexOf(item.show.id) !== -1 
+                    ? heartLiked
+                    : heart
+                      }
+                    alt="heart"
+                  ></Cards.Heart>
+                
               </Cards.GroupSpace>
             </Cards.Item>
           ))

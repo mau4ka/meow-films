@@ -1,6 +1,8 @@
 import React from "react";
 import { WatchContainer } from "../containers/WatchContainer";
+import useGetLiked from "../hooks/use-getLiked";
 
 export default function Watch() {
-  return <WatchContainer />;
+  const liked = useGetLiked();
+  return <WatchContainer liked={liked} />;
 }

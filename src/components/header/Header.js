@@ -8,6 +8,7 @@ import {
   Background,
   Dropdown,
   Picture,
+  PictureHome,
   Link,
   Profile,
   FeatureCallOut,
@@ -60,6 +61,10 @@ Header.Feature = function HeaderFeature({ children, ...restProps }) {
 
 Header.Picture = function HeaderPicture({ src, ...restProps }) {
   return <Picture {...restProps} src={`/images/users/${src}.jpg`} />;
+};
+
+Header.PictureHome = function HeaderPicture({ ...restProps }) {
+  return <PictureHome {...restProps} />;
 };
 
 Header.Dropdown = function HeaderDropdown({ children, ...restProps }) {

@@ -11,6 +11,7 @@ import {
   Column,
   Heart,
   GroupSpace,
+  GroupRow,
 } from "./cardStyles";
 
 export default function Cards({ children, ...restProps }) {
@@ -19,6 +20,10 @@ export default function Cards({ children, ...restProps }) {
 
 Cards.Group = function CardsGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
+};
+
+Cards.GroupRow = function CardsGroupRow({ children, ...restProps }) {
+  return <GroupRow {...restProps}>{children}</GroupRow>;
 };
 
 Cards.GroupSpace = function CardsGroup({ children, ...restProps }) {

@@ -3,9 +3,10 @@ import * as axios from "axios";
 import { ContextShow } from "../context/contextShow";
 import { FirebaseContext } from "../context/firebase";
 
-export default function useSetLike(id) {
+export default function useSetLike(el) {
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
+
   console.log(user.email);
   let userEmail = user.email;
   if (user.email) {
@@ -17,7 +18,7 @@ export default function useSetLike(id) {
       .then(function (doc) {
         if (doc.exists) {
           console.log("Document data:", doc.data(), doc.data().likes);
-          if (id === "" || !id) {
+          if (el.id === "" || !el.id) {
             console.log("Bad id");
           } else if (!doc.data().likes) {
             firebase
@@ -25,9 +26,23 @@ export default function useSetLike(id) {
               .collection("userPages")
               .doc(userEmail)
               .update({
-                likes: [id],
+                likes: [el],
+                likesId: [el.id],
               });
-          } else if (doc.data().likes.indexOf(id) !== -1) {
+          } else if (doc.data().likesId.indexOf(el.id) !== -1) {
+
+            let newLikes = doc.data().likes.filter(function (number) {
+              return number.id !== el.id;
+            });
+            let newLikesId = doc.data().likesId.filter(function (number) {
+              return number !== el.id;
+            });
+
+            firebase.firestore().collection("userPages").doc(userEmail).update({
+              likes: newLikes,
+              likesId: newLikesId,
+            });
+            
             console.log("Already liked");
           } else if (Array.isArray(doc.data().likes)) {
             firebase
@@ -35,7 +50,8 @@ export default function useSetLike(id) {
               .collection("userPages")
               .doc(userEmail)
               .update({
-                likes: [...doc.data().likes, id],
+                likes: [...doc.data().likes, el],
+                likesId: [...doc.data().likesId, el.id],
               });
           } else {
             firebase
@@ -43,7 +59,8 @@ export default function useSetLike(id) {
               .collection("userPages")
               .doc(userEmail)
               .update({
-                likes: [doc.data().likes, id],
+                likes: [doc.data().likes, el.id],
+                likesId: [doc.data().likesId, el.id],
               });
           }
         } else {
@@ -54,7 +71,8 @@ export default function useSetLike(id) {
             .collection("userPages")
             .doc(userEmail)
             .set({
-              likes: [id],
+              likes: [el],
+              likesId: [el.id],
             });
         }
       })

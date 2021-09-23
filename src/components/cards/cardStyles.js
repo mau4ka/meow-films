@@ -21,6 +21,13 @@ export const Group = styled.div`
   flex-direction: row;
 `;
 
+export const GroupRow = styled.div`
+  display: flex;
+  flex-wrap: no-wrap;
+  flex-direction: row;
+  overflow-x: auto;
+`;
+
 export const GroupSpace = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -41,8 +48,7 @@ export const Item = styled.div`
   background-color: #696969;
 
   &:hover {
-    transform: scale(1.3);
-    z-index: 99;
+    background-color: grey;
   }
 `;
 
@@ -76,10 +82,6 @@ export const Image = styled.img`
 
 export const Heart = styled.img`
   border: 0;
-  // width: 100%;
-  // max-width: 305px;
   cursor: pointer;
-  // height: 18rem;
-  // padding-left: 150px;
   margin: 0;
 `;

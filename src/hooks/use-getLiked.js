@@ -17,11 +17,16 @@ export default function useGetLiked() {
         .get()
         .then(function (doc) {
           if (doc.exists) {
-            console.log("Document data:", doc.data(), doc.data().likes);
+            console.log(
+              "Document data:",
+              doc.data(),
+              doc.data().likes,
+              doc.data().likesId
+            );
 
             // setGetLike('maau')
 
-            const data = doc.data().likes;
+            const data = doc.data();
 
             setGetLike(data);
           } else {

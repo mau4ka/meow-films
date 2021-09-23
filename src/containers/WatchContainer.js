@@ -2,14 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import { Header, Loading } from "../components";
 import * as ROUTES from "../constants/routes";
 import logo from "../meowLogo.png";
+import userHome from "../user.png";
 import { FirebaseContext } from "../context/firebase";
 import { FooterContainer } from "./FooterContainer";
 import { CardsContainer } from "./CardsContainer";
 import { ContextShow } from "../context/contextShow";
-import { getDatabase, ref, set } from "firebase/database";
-import useSetLike from "../hooks/use-setLike";
+// import { getDatabase, ref, set } from "firebase/database";
+// import useSetLike from "../hooks/use-setLike";
 
-export function WatchContainer() {
+export function WatchContainer({ liked }) {
   const [contextShow, setContextShow] = useState("cat");
 
   const [loading, setLoading] = useState(true);
@@ -24,8 +25,6 @@ export function WatchContainer() {
       setLoading(false);
     }, 1000);
   }, []);
-
-  
 
   return (
     <>
@@ -68,6 +67,7 @@ export function WatchContainer() {
               />
               <Header.Profile>
                 <Header.Picture src={user.photoURL} />
+
                 <Header.Dropdown>
                   <Header.Group>
                     <Header.Picture src={user.photoURL} />
@@ -80,6 +80,11 @@ export function WatchContainer() {
                   </Header.Group>
                 </Header.Dropdown>
               </Header.Profile>
+              <Header.PictureHome
+                src={userHome}
+                alt="home"
+                onClick={() => (window.location.href = ROUTES.USER)}
+              />
             </Header.Group>
           </Header.Frame>
 
@@ -104,7 +109,7 @@ export function WatchContainer() {
           </Header.Feature>
         </Header>
 
-        <CardsContainer name={contextShow} />
+        <CardsContainer name={contextShow} liked={liked} />
 
         <FooterContainer />
       </ContextShow.Provider>
