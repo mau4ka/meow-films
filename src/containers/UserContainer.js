@@ -50,43 +50,15 @@ export default function User(props) {
           <Cards.Title>Liked</Cards.Title>
           <Cards.GroupRow>
             {props.liked.likes.map((item) => (
-              <Cards.Item key={item.id}>
-                {!item.image || !item.image.original ? (
-                  <Cards.Image
-                    src={no_image}
-                    alt="no-image"
-                    onClick={() =>
-                      (window.location.href = `${ROUTES.SHOW}/${item.id}`)
-                    }
-                  />
-                ) : (
-                  <Cards.Image
-                    src={item.image.original}
-                    alt={item.name}
-                    onClick={() =>
-                      (window.location.href = `${ROUTES.SHOW}/${item.id}`)
-                    }
-                  />
-                )}
-                <Cards.GroupSpace>
-                  <Cards.Column>
-                    <Cards.SubTitle>{item.name}</Cards.SubTitle>
-                    <Cards.Text>Language: {item.language}</Cards.Text>
-                    {/* <Cards.Text>Status: {item.status}</Cards.Text> */}
-                  </Cards.Column>
-                  {/* <Cards.Heart
-                  onClick={() => setLike(item.show)}
-                  src={heart}
-                  alt="heart"
-                ></Cards.Heart> */}
-                </Cards.GroupSpace>
-              </Cards.Item>
+              <Cards.OneItem item={item} key={item.id}>
+                <p> </p>
+              </Cards.OneItem>
             ))}
           </Cards.GroupRow>
         </Cards>
       ) : (
-        // ? props.liked.map((el)=><div key={el.id}>{el.name}</div>)
-        <div>mau</div>
+        
+        <div>loading...</div>
       )}
     </>
   );

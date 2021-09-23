@@ -3,6 +3,7 @@ import { Header, Loading, Show } from "../components";
 import { FirebaseContext } from "../context/firebase";
 import * as ROUTES from "../constants/routes";
 import logo from "../meowLogo.png";
+import userHome from "../user.png";
 import useContentShow from "../hooks/use-api-show";
 import no_image from "../no_image.png";
 
@@ -44,6 +45,11 @@ export default function ShowPage(props) {
                 </Header.Group>
               </Header.Dropdown>
             </Header.Profile>
+            <Header.PictureHome
+              src={userHome}
+              alt="home"
+              onClick={() => (window.location.href = ROUTES.USER)}
+            />
           </Header.Group>
         </Header.Frame>
       </Header>
@@ -63,6 +69,10 @@ export default function ShowPage(props) {
             {show.genres ? (
               <Show.Text>Genres: {show.genres.join(", ")}</Show.Text>
             ) : null}
+            {show.summary ? (
+              <Show.Text>{show.summary.replace(/<[^>]*>/g, " ")}</Show.Text>
+            ) : null}
+
             <Show.Link href={show.url}>Watch on tvmaze</Show.Link>
           </Show.Group>
         </Show>

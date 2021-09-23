@@ -9,7 +9,7 @@ export default function useSetLike(el) {
 
   console.log(user.email);
   let userEmail = user.email;
-  if (user.email) {
+  if (user.email && el) {
     firebase
       .firestore()
       .collection("userPages")
@@ -30,7 +30,6 @@ export default function useSetLike(el) {
                 likesId: [el.id],
               });
           } else if (doc.data().likesId.indexOf(el.id) !== -1) {
-
             let newLikes = doc.data().likes.filter(function (number) {
               return number.id !== el.id;
             });
@@ -42,7 +41,7 @@ export default function useSetLike(el) {
               likes: newLikes,
               likesId: newLikesId,
             });
-            
+
             console.log("Already liked");
           } else if (Array.isArray(doc.data().likes)) {
             firebase
