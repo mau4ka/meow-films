@@ -23,9 +23,6 @@ export default function useGetLiked() {
               doc.data().likes,
               doc.data().likesId
             );
-
-            // setGetLike('maau')
-
             const data = doc.data();
 
             setGetLike(data);

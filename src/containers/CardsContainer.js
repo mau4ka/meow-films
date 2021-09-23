@@ -64,7 +64,13 @@ export function CardsContainer({ name, liked }) {
                 </Cards.Column>
                 
                 <Cards.Heart
-                    onClick={() => setLike(item.show)}
+                    onClick={(el) => {
+                      setLike(item.show)
+                      
+                       el.target.getAttribute('src') === '/static/media/heartLiked.8f98dc4c.svg'
+                       ? el.target.src="/static/media/heart.728f1676.svg"
+                       : el.target.src="/static/media/heartLiked.8f98dc4c.svg"
+                    }}
                     src={liked !== null &&
                       liked.likesId &&
                       liked.likesId.indexOf(item.show.id) !== -1 
