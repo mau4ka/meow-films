@@ -13,6 +13,7 @@ import {
   Profile,
   FeatureCallOut,
   ButtonLink,
+  Button,
   PlayButton,
   Text,
   Feature,
@@ -77,6 +78,10 @@ Header.TextLink = function HeaderTextLink({ children, ...restProps }) {
 
 Header.PlayButton = function HeaderPlayButton({ children, ...restProps }) {
   return <PlayButton {...restProps}>{children}</PlayButton>;
+};
+
+Header.Button = function HeaderButton({ children, ...restProps }) {
+  return <Button {...restProps}>{children}</Button>;
 };
 
 Header.FeatureCallOut = function HeaderFeatureCallOut({

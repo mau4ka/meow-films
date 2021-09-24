@@ -45,6 +45,9 @@ export default function User(props) {
           </Header.Group>
         </Header.Frame>
       </Header>
+      <Header.Button onClick={() => (window.location.href = ROUTES.FRIENDS)}>
+        Go to friend list
+      </Header.Button>
       {props.liked ? (
         <Cards>
           <Cards.Title>Liked</Cards.Title>
@@ -57,7 +60,6 @@ export default function User(props) {
           </Cards.GroupRow>
         </Cards>
       ) : (
-        
         <div>loading...</div>
       )}
     </>

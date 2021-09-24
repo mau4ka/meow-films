@@ -210,6 +210,18 @@ export const PlayButton = styled.button`
   }
 `;
 
+export const Button = styled.button`
+  background-color: red;
+  color: black;
+  margin: 50px 10px 0 10px;
+  border-width: 0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+`;
+
 export const SearchForm = styled.form`
   display: flex;
   width: ${({ active }) => (active === true ? "210px" : "0px")};

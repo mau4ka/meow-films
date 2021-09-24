@@ -38,11 +38,37 @@ export default function FriendsPage() {
           </Header.Group>
         </Header.Frame>
       </Header>
+      <AllUsers.BigTitle>Your Friends</AllUsers.BigTitle>
       {allUsers ? (
         <AllUsers>
-          <AllUsers.Group>
+          <AllUsers.GroupRow wrap="nowrap" overflow="auto" justify="start">
             {allUsers.map((el) => (
-              <AllUsers.Item key={el.email}>
+              <AllUsers.Item key={el.email} direction="column">
+                {el.photo <= 5 ? (
+                  <AllUsers.Image src={`/images/users/${el.photo}.jpg`} />
+                ) : (
+                  <AllUsers.Image src={`/images/users/1.jpg`} />
+                )}
+
+                <AllUsers.Title>{el.name}</AllUsers.Title>
+                <AllUsers.Text>{el.email}</AllUsers.Text>
+
+                <AllUsers.ButtonDelete>Delete friend</AllUsers.ButtonDelete>
+              </AllUsers.Item>
+            ))}
+          </AllUsers.GroupRow>
+        </AllUsers>
+      ) : (
+        <div>Empty</div>
+      )}
+
+      <AllUsers.BigTitle>Add Friends</AllUsers.BigTitle>
+
+      {allUsers ? (
+        <AllUsers>
+          <AllUsers.GroupRow wrap="wrap" overflow="none" justify="center">
+            {allUsers.map((el) => (
+              <AllUsers.Item key={el.email} direction="row">
                 {el.photo <= 5 ? (
                   <AllUsers.Image src={`/images/users/${el.photo}.jpg`} />
                 ) : (
@@ -53,10 +79,10 @@ export default function FriendsPage() {
                   <AllUsers.Title>{el.name}</AllUsers.Title>
                   <AllUsers.Text>{el.email}</AllUsers.Text>
                 </AllUsers.Group>
+                <AllUsers.ButtonAdd>Add friend</AllUsers.ButtonAdd>
               </AllUsers.Item>
             ))}
-            ))
-          </AllUsers.Group>
+          </AllUsers.GroupRow>
         </AllUsers>
       ) : (
         <div>Empty</div>
