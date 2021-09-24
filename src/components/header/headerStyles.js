@@ -255,7 +255,7 @@ export const Search = styled.div`
     cursor: pointer;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 580px) {
     display: none;
   }
 `;
@@ -268,6 +268,7 @@ export const Select = styled.select`
   height: 30px;
   font-size: 14px;
   border-radius: 4px;
+  margin: 10px;
 `;
 
 export const SearchIcon = styled.button`

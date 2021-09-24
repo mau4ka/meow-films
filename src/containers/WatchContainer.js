@@ -7,14 +7,14 @@ import { FirebaseContext } from "../context/firebase";
 import { FooterContainer } from "./FooterContainer";
 import { CardsContainer } from "./CardsContainer";
 import { ContextShow } from "../context/contextShow";
-// import { getDatabase, ref, set } from "firebase/database";
-// import useSetLike from "../hooks/use-setLike";
 
 export function WatchContainer({ liked }) {
   const [contextShow, setContextShow] = useState(null);
 
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [category, setCategory] = useState(null);
 
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
@@ -34,31 +34,6 @@ export function WatchContainer({ liked }) {
           <Header.Frame>
             <Header.Group>
               <Header.Logo to={ROUTES.MAIN} src={logo} alt="Netflix" />
-              <Header.Select
-                onChange={({ target }) => {
-                  console.log(target.value);
-                  setContextShow(target.value);
-                }}
-              >
-                <option value="cat">Cat</option>
-                <option value="drama">Drama</option>
-                <option value="romance">Romance</option>
-                <option value="comedy">Comedy</option>
-                <option value="crime">Crime</option>
-                <option value="triller">Thriller</option>
-                <option value="science">Science</option>
-                <option value="children">children</option>
-                <option value="music">Music</option>
-                <option value="family">Family</option>
-                <option value="nature">Nature</option>
-                <option value="anime">Anime</option>
-                <option value="adventure">Adventure</option>
-                <option value="horror">Horror</option>
-                <option value="war">War</option>
-                <option value="mystery">Mystery</option>
-                <option value="medical">Medical</option>
-                <option value="fantasy">Fantasy</option>
-              </Header.Select>
             </Header.Group>
             <Header.Group>
               <Header.Search
@@ -119,7 +94,34 @@ export function WatchContainer({ liked }) {
           </Cards.Button>
         ) : null}
 
-        <CardsContainer name={contextShow} liked={liked} />
+        {contextShow === null || contextShow === "null" ? (
+          <Header.Select
+            onChange={({ target }) => {
+              console.log(target.value);
+              setCategory(target.value);
+              console.log(contextShow);
+            }}
+          >
+            <option value="null">All</option>
+            <option value="Drama">Drama</option>
+            <option value="Romance">Romance</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Crime">Crime</option>
+            <option value="Triller">Thriller</option>
+            <option value="Science">Science</option>
+            <option value="Music">Music</option>
+            <option value="Family">Family</option>
+            <option value="Nature">Nature</option>
+            <option value="Anime">Anime</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Horror">Horror</option>
+            <option value="War">War</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Medical">Medical</option>
+            <option value="Fantasy">Fantasy</option>
+          </Header.Select>
+        ) : null}
+        <CardsContainer name={contextShow} category={category} liked={liked} />
 
         <FooterContainer />
       </ContextShow.Provider>
