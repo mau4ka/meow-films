@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as axios from "axios";
 
-export default function useContentAllShows() {
+export default function useApiAllShows() {
   const [content, setContent] = useState([]);
 
   useEffect(async () => {

@@ -17,6 +17,7 @@ import {
   Heart,
   GroupSpace,
   GroupRow,
+  Button,
 } from "./cardStyles";
 import useSetLike from "../../hooks/use-setLike";
 
@@ -64,10 +65,11 @@ Cards.Heart = function CardsImage({ ...restProps }) {
   return <Heart {...restProps} />;
 };
 
-Cards.OneItem = function CardsImage({ children, item, liked, ...restProps }) {
-  // const [like, setLike] = useState(null);
-  // useSetLike(like);
+Cards.Button = function CardsButton({ children, ...restProps }) {
+  return <Button {...restProps}>{children}</Button>;
+};
 
+Cards.OneItem = function CardsImage({ children, item, liked, ...restProps }) {
   return (
     <Cards.Item>
       {item.image === null || item.image.medium === null ? (

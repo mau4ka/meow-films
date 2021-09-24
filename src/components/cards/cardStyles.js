@@ -17,6 +17,7 @@ export const Container = styled.div`
 
 export const Group = styled.div`
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   flex-direction: row;
 `;
@@ -63,7 +64,7 @@ export const SubTitle = styled.p`
 
 export const Text = styled.p`
   margin-top: 5px;
-  font-size: 10px;
+  font-size: 12px;
   color: white;
   margin-bottom: 0;
 
@@ -78,6 +79,21 @@ export const Image = styled.img`
   height: 18rem;
   padding: 0;
   margin: 0;
+`;
+
+export const Button = styled.button`
+  box-shadow: 0 0.6vw 1vw -0.4vw rgba(0, 0, 0, 0.35);
+  background-color: red;
+  color: white;
+  border-width: 0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  // max-width: 130px;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 20px 0 0 20px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
 `;
 
 export const Heart = styled.img`

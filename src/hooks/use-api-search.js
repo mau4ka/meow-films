@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import * as axios from "axios";
 import { ContextShow } from "../context/contextShow";
 
-export default function useContent(category) {
+export default function useApiSearch(category) {
   const [content, setContent] = useState([]);
   const [contextShow, setContextShow] = useContext(ContextShow);
 

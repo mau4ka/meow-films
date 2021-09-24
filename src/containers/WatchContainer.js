@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Header, Loading } from "../components";
+import { Cards, Header, Loading } from "../components";
 import * as ROUTES from "../constants/routes";
 import logo from "../meowLogo.png";
 import userHome from "../user.png";
@@ -11,7 +11,7 @@ import { ContextShow } from "../context/contextShow";
 // import useSetLike from "../hooks/use-setLike";
 
 export function WatchContainer({ liked }) {
-  const [contextShow, setContextShow] = useState("cat");
+  const [contextShow, setContextShow] = useState(null);
 
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -108,6 +108,16 @@ export function WatchContainer({ liked }) {
             </Header.PlayButton>
           </Header.Feature>
         </Header>
+
+        {contextShow !== null ? (
+          <Cards.Button
+            onClick={() => {
+              setContextShow(null);
+            }}
+          >
+            Show all shows
+          </Cards.Button>
+        ) : null}
 
         <CardsContainer name={contextShow} liked={liked} />
 
