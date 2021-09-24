@@ -8,5 +8,4 @@ export { default as SignInForm } from "./signInForm/SignInForm";
 export { default as Loading } from "./loading/Loading";
 export { default as Cards } from "./cards/Cards";
 export { default as Show } from "./show/Show";
-
-
+export { default as AllUsers } from "./allUsers/AllUsers";

@@ -9,6 +9,7 @@ import { IsUserRedirect, ProtectedRoute } from "./helpers/routes";
 import useAuthListener from "./hooks/use-auth-listener";
 import Show from "./pages/show";
 import UserPage from "./pages/user";
+import FriendsPage from "./pages/friends";
 
 function App() {
   const { user } = useAuthListener();
@@ -40,6 +41,10 @@ function App() {
 
         <ProtectedRoute user={user} path={ROUTES.USER}>
           <UserPage />
+        </ProtectedRoute>
+
+        <ProtectedRoute user={user} path={ROUTES.FRIENDS}>
+          <FriendsPage />
         </ProtectedRoute>
 
         <IsUserRedirect

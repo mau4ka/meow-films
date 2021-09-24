@@ -19,24 +19,31 @@ export default function Register() {
 
   const handleRegister = (event) => {
     event.preventDefault();
+    let photo = Math.floor(Math.random() * 5) + 1;
 
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((result) =>
         result.user
+
           .updateProfile({
             displayName: firstName,
-            photoURL: Math.floor(Math.random() * 5) + 1,
+            photoURL: photo,
           })
           .then(() => {
+            firebase.firestore().collection("users").doc(email).set({
+              email: email,
+              name: firstName,
+              photo: photo,
+            });
             history.push(ROUTES.WATCH);
           })
       )
       .catch((error) => {
-        setFirstName('');
-        setEmail('');
-        setPassword('');
+        setFirstName("");
+        setEmail("");
+        setPassword("");
         setError(error.message);
       });
   };
