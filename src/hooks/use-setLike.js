@@ -58,7 +58,7 @@ export default function useSetLike(el) {
               .collection("userPages")
               .doc(userEmail)
               .update({
-                likes: [doc.data().likes, el.id],
+                likes: [doc.data().likes, el],
                 likesId: [doc.data().likesId, el.id],
               });
           }
