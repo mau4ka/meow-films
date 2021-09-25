@@ -79,6 +79,7 @@ export const Item = styled.div`
   border: 2px solid grey;
   margin: 10px;
   min-width: 250px;
+  text-align: center;
 `;
 
 export const Text = styled.p`

@@ -6,6 +6,7 @@ import logo from "../meowLogo.png";
 import userHome from "../user.png";
 import useContentShow from "../hooks/use-api-show";
 import no_image from "../no_image.png";
+import { ShareToFriendsContainer } from "../containers/ShareToFriends";
 
 export default function ShowPage(props) {
   console.log(window.location.href.split("/").pop());
@@ -78,6 +79,12 @@ export default function ShowPage(props) {
         </Show>
       ) : (
         <Show.Title>Nothing found</Show.Title>
+      )}
+
+      {user && user.email ? (
+        <ShareToFriendsContainer />
+      ) : (
+        <Show.Title>{show.name}</Show.Title>
       )}
     </>
   );
