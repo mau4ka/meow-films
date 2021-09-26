@@ -1,12 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import { AllUsers, Cards, Header, Loading } from "../components";
-import * as ROUTES from "../constants/routes";
-import logo from "../meowLogo.png";
-import userHome from "../user.png";
+import React, { useContext } from "react";
+import { AllUsers } from "../components";
 import { FirebaseContext } from "../context/firebase";
-import { FooterContainer } from "./FooterContainer";
-import { CardsContainer } from "./CardsContainer";
-import { ContextShow } from "../context/contextShow";
 import useSetFriends from "../hooks/use-setFriends";
 import useGetAllUsers from "../hooks/use-getUsers";
 import useGetFriend from "../hooks/use-getFriends";
@@ -71,7 +65,11 @@ export function FriendsContainer() {
             <AllUsers.GroupRow wrap="wrap" overflow="none" justify="center">
               {allUsers
                 .filter(function (number) {
-                  return !friendsList.friendsEmails.includes(number.email);
+                  if (friendsList.friendsEmails) {
+                    return !friendsList.friendsEmails.includes(number.email);
+                  } else {
+                    return true;
+                  }
                 })
                 .map((el) => (
                   <AllUsers.Item key={el.email} direction="row">

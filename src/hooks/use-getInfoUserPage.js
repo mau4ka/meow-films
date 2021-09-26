@@ -1,16 +1,13 @@
-import { useContext, useEffect, useState } from "react";
-import { ContextLikes } from "../context/contextLikes";
+import { useContext, useState } from "react";
 import { FirebaseContext } from "../context/firebase";
 
-export default function useGetLiked() {
+export default function useGetInfoUserPage() {
   const [getLike, setGetLike] = useState(null);
-
-  const [contextLikes, setContextLikes] = useContext(ContextLikes);
 
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
 
-  useEffect(() => {
+  if (!getLike) {
     let userEmail = user.email;
     firebase
       .firestore()
@@ -35,6 +32,6 @@ export default function useGetLiked() {
       .catch(function (error) {
         console.log("Error getting document:", error);
       });
-  }, [contextLikes]);
+  }
   return getLike;
 }

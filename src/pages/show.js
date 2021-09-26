@@ -82,7 +82,7 @@ export default function ShowPage(props) {
       )}
 
       {user && user.email ? (
-        <ShareToFriendsContainer />
+        <ShareToFriendsContainer show={show} />
       ) : (
         <Show.Title>{show.name}</Show.Title>
       )}

@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Cards, Header, Loading, Show } from "../components";
+import { Cards, Header, Loading } from "../components";
 import { FirebaseContext } from "../context/firebase";
 import * as ROUTES from "../constants/routes";
 import logo from "../meowLogo.png";
-import no_image from "../no_image.png";
 
 export default function User(props) {
-  console.log(props.liked);
+  console.log(props.info);
 
-  // const [contextLike, setContextLike] = useState(null);
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
   const [loading, setLoading] = useState(true);
@@ -48,11 +46,27 @@ export default function User(props) {
       <Header.Button onClick={() => (window.location.href = ROUTES.FRIENDS)}>
         Go to friend list
       </Header.Button>
-      {props.liked ? (
+
+      {props.info && props.info.likes ? (
         <Cards>
           <Cards.Title>Liked</Cards.Title>
           <Cards.GroupRow>
-            {props.liked.likes.map((item) => (
+            {props.info.likes.map((item) => (
+              <Cards.OneItem item={item} key={item.id}>
+                <p> </p>
+              </Cards.OneItem>
+            ))}
+          </Cards.GroupRow>
+        </Cards>
+      ) : (
+        <div>loading...</div>
+      )}
+
+      {props.info && props.info.recommended ? (
+        <Cards>
+          <Cards.Title>Recommended by friends</Cards.Title>
+          <Cards.GroupRow>
+            {props.info.recommended.map((item) => (
               <Cards.OneItem item={item} key={item.id}>
                 <p> </p>
               </Cards.OneItem>
