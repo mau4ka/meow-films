@@ -5,15 +5,21 @@ import heart from "../heart.svg";
 import heartLiked from "../heartLiked.svg";
 import useSetLike from "../hooks/use-setLike";
 import useApiAllShows from "../hooks/use-api-all-shows";
+import { ContextLikes } from "../context/contextLikes";
+import { useContext } from "react/cjs/react.development";
+import useGetLiked from "../hooks/use-getLiked";
 
-export function CardsContainer({ name, category, liked }) {
-  const [like, setLike] = useState(null);
-  useSetLike(like);
+export function CardsContainer({ name, category }) {
+  const liked = useGetLiked();
+
+  const [contextLikes, setContextLikes] = useContext(ContextLikes);
+
+  useSetLike(contextLikes);
   let allShows = useApiAllShows();
   let search = useApiSearch(name);
   console.log(name);
 
-  console.log("category" + category);
+  console.log(liked);
 
   const [loading, setLoading] = useState(true);
 
@@ -34,13 +40,7 @@ export function CardsContainer({ name, category, liked }) {
                 <Cards.OneItem item={item} liked={liked} key={item.id}>
                   <Cards.Heart
                     onClick={(el) => {
-                      setLike(item);
-
-                      el.target.getAttribute("src") ===
-                      "/static/media/heartLiked.8f98dc4c.svg"
-                        ? (el.target.src = "/static/media/heart.728f1676.svg")
-                        : (el.target.src =
-                            "/static/media/heartLiked.8f98dc4c.svg");
+                      setContextLikes(item);
                     }}
                     src={
                       liked !== null &&
@@ -60,13 +60,7 @@ export function CardsContainer({ name, category, liked }) {
                   <Cards.OneItem item={item} liked={liked} key={item.id}>
                     <Cards.Heart
                       onClick={(el) => {
-                        setLike(item);
-
-                        el.target.getAttribute("src") ===
-                        "/static/media/heartLiked.8f98dc4c.svg"
-                          ? (el.target.src = "/static/media/heart.728f1676.svg")
-                          : (el.target.src =
-                              "/static/media/heartLiked.8f98dc4c.svg");
+                        setContextLikes(item);
                       }}
                       src={
                         liked !== null &&
@@ -98,13 +92,7 @@ export function CardsContainer({ name, category, liked }) {
                 >
                   <Cards.Heart
                     onClick={(el) => {
-                      setLike(item.show);
-
-                      el.target.getAttribute("src") ===
-                      "/static/media/heartLiked.8f98dc4c.svg"
-                        ? (el.target.src = "/static/media/heart.728f1676.svg")
-                        : (el.target.src =
-                            "/static/media/heartLiked.8f98dc4c.svg");
+                      setContextLikes(item.show);
                     }}
                     src={
                       liked !== null &&

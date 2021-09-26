@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import * as axios from "axios";
-import { ContextShow } from "../context/contextShow";
 import { FirebaseContext } from "../context/firebase";
+import { ContextLikes } from "../context/contextLikes";
 
 export default function useSetLike(el) {
+  const [contextLikes, setContextLikes] = useContext(ContextLikes);
+
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
 
@@ -29,6 +30,7 @@ export default function useSetLike(el) {
                 likes: [el],
                 likesId: [el.id],
               });
+            setContextLikes(null);
           } else if (doc.data().likesId.indexOf(el.id) !== -1) {
             let newLikes = doc.data().likes.filter(function (number) {
               return number.id !== el.id;
@@ -41,6 +43,7 @@ export default function useSetLike(el) {
               likes: newLikes,
               likesId: newLikesId,
             });
+            setContextLikes(null);
 
             console.log("Already liked");
           } else if (Array.isArray(doc.data().likes)) {
@@ -52,6 +55,7 @@ export default function useSetLike(el) {
                 likes: [...doc.data().likes, el],
                 likesId: [...doc.data().likesId, el.id],
               });
+            setContextLikes(null);
           } else {
             firebase
               .firestore()
@@ -61,6 +65,7 @@ export default function useSetLike(el) {
                 likes: [doc.data().likes, el],
                 likesId: [doc.data().likesId, el.id],
               });
+            setContextLikes(null);
           }
         } else {
           console.log("No info about user");
@@ -73,6 +78,7 @@ export default function useSetLike(el) {
               likes: [el],
               likesId: [el.id],
             });
+          setContextLikes(null);
         }
       })
       .catch(function (error) {

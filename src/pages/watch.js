@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import { useContext } from "react/cjs/react.development";
 import { WatchContainer } from "../containers/WatchContainer";
-import useGetLiked from "../hooks/use-getLiked";
+import { ContextLikes } from "../context/contextLikes";
+import { FirebaseContext } from "../context/firebase";
 
 export default function Watch() {
-  const liked = useGetLiked();
-  return <WatchContainer liked={liked} />;
+  const [contextLikes, setContextLikes] = useState(null);
+
+  const { firebase } = useContext(FirebaseContext);
+  const user = firebase.auth().currentUser;
+
+  let userEmail = null;
+  if (user) {
+    userEmail = user.email;
+  }
+
+  return (
+    <ContextLikes.Provider value={[contextLikes, setContextLikes]}>
+      {user && userEmail ? <WatchContainer /> : null}
+    </ContextLikes.Provider>
+  );
 }

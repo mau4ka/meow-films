@@ -15,8 +15,6 @@ import { ContextFriends } from "../context/contextFriends";
 export function FriendsContainer() {
   const [contextFriends, setContextFriends] = useContext(ContextFriends);
 
-  // setContextFriends(null)
-
   let friendsList = useGetFriend();
 
   if (friendsList) {
@@ -27,15 +25,10 @@ export function FriendsContainer() {
   const user = firebase.auth().currentUser || {};
   console.log(user);
 
-  const [friend, setFriend] = useState(null);
-  useSetFriends(friend);
+  useSetFriends(contextFriends);
 
   const allUsers = useGetAllUsers();
   console.log(allUsers);
-
-  useEffect(() => {
-    console.log("mau");
-  }, [setFriend]);
 
   return (
     <>
@@ -58,7 +51,7 @@ export function FriendsContainer() {
 
                 <AllUsers.ButtonDelete
                   onClick={() => {
-                    setFriend(el);
+                    setContextFriends(el);
                   }}
                 >
                   Delete friend
@@ -94,7 +87,7 @@ export function FriendsContainer() {
                     </AllUsers.Group>
                     <AllUsers.ButtonAdd
                       onClick={() => {
-                        setFriend(el);
+                        setContextFriends(el);
                       }}
                     >
                       Add friend

@@ -44,7 +44,7 @@ export default function useSetFriends(person) {
               friends: newFriends,
               friendsEmails: newFriendsEmail,
             });
-            // setContextFriendsMinus(person.email)
+
             setContextFriends(person.email);
 
             console.log("Already friendship");

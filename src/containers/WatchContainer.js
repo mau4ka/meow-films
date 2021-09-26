@@ -8,7 +8,7 @@ import { FooterContainer } from "./FooterContainer";
 import { CardsContainer } from "./CardsContainer";
 import { ContextShow } from "../context/contextShow";
 
-export function WatchContainer({ liked }) {
+export function WatchContainer() {
   const [contextShow, setContextShow] = useState(null);
 
   const [loading, setLoading] = useState(true);
@@ -121,7 +121,8 @@ export function WatchContainer({ liked }) {
             <option value="Fantasy">Fantasy</option>
           </Header.Select>
         ) : null}
-        <CardsContainer name={contextShow} category={category} liked={liked} />
+
+        <CardsContainer name={contextShow} category={category} />
 
         <FooterContainer />
       </ContextShow.Provider>
