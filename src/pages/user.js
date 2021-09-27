@@ -1,10 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
-// import useGetLiked from "../hooks/use-getLiked";
 import User from "../containers/UserContainer";
-import useGetInfoUserPage from "../hooks/use-getInfoUserPage";
+import { ContextUserPage } from "../context/contextUserPage";
+import { FirebaseContext } from "../context/firebase";
 
 export default function UserPage(props) {
-  const info = useGetInfoUserPage();
+  const [contextUserPage, setContextUserPage] = useState(null);
 
-  return <User info={info} />;
+  const { firebase } = useContext(FirebaseContext);
+  const user = firebase.auth().currentUser;
+
+  let userEmail = null;
+  if (user) {
+    userEmail = user.email;
+  }
+
+  return (
+    <ContextUserPage.Provider value={[contextUserPage, setContextUserPage]}>
+      {user && userEmail ? <User /> : null}
+    </ContextUserPage.Provider>
+  );
 }

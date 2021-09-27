@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { AllUsers } from "../components";
 import { FirebaseContext } from "../context/firebase";
-import useSetFriends from "../hooks/use-setFriends";
 import useGetAllUsers from "../hooks/use-getUsers";
 import useGetFriend from "../hooks/use-getFriends";
 import { ContextFriends } from "../context/contextFriends";
@@ -19,8 +18,90 @@ export function FriendsContainer() {
   const user = firebase.auth().currentUser || {};
   console.log(user);
 
-  useSetFriends(contextFriends);
+  let setFriend = async (person) => {
+    let userEmail = user.email;
+    if (user.email && person) {
+      await firebase
+        .firestore()
+        .collection("userPages")
+        .doc(userEmail)
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            console.log("Document data:", doc.data(), doc.data().friends);
+            if (person.email === "" || !person.email) {
+              console.log("Bad person");
+            } else if (!doc.data().friends) {
+              firebase
+                .firestore()
+                .collection("userPages")
+                .doc(userEmail)
+                .update({
+                  friends: [person],
+                  friendsEmails: [person.email],
+                });
+            } else if (doc.data().friendsEmails.indexOf(person.email) !== -1) {
+              let newFriends = doc.data().friends.filter(function (number) {
+                return number.email !== person.email;
+              });
+              let newFriendsEmail = doc
+                .data()
+                .friendsEmails.filter(function (number) {
+                  return number !== person.email;
+                });
 
+              firebase
+                .firestore()
+                .collection("userPages")
+                .doc(userEmail)
+                .update({
+                  friends: newFriends,
+                  friendsEmails: newFriendsEmail,
+                });
+
+              console.log("Already friendship");
+            } else if (
+              Array.isArray(doc.data().friends) &&
+              Array.isArray(doc.data().friendsEmails)
+            ) {
+              console.log("Is arrays");
+              firebase
+                .firestore()
+                .collection("userPages")
+                .doc(userEmail)
+                .update({
+                  friends: [...doc.data().friends, person],
+                  friendsEmails: [...doc.data().friendsEmails, person.email],
+                });
+            } else {
+              console.log("NO arrays");
+              firebase
+                .firestore()
+                .collection("userPages")
+                .doc(userEmail)
+                .update({
+                  friends: [doc.data().friends, person],
+                  friendsEmails: [doc.data().friendsEmails, person.email],
+                });
+            }
+          } else {
+            console.log("No info about user");
+
+            firebase
+              .firestore()
+              .collection("userPages")
+              .doc(userEmail)
+              .set({
+                friends: [person],
+                friendsEmails: [person.email],
+              });
+          }
+        })
+        .catch(function (error) {
+          console.log("Error getting document:", error);
+        });
+    }
+  };
   const allUsers = useGetAllUsers();
   console.log(allUsers);
 
@@ -44,8 +125,9 @@ export function FriendsContainer() {
                 <AllUsers.Text>{el.email}</AllUsers.Text>
 
                 <AllUsers.ButtonDelete
-                  onClick={() => {
-                    setContextFriends(el);
+                  onClick={async () => {
+                    await setFriend(el);
+                    setContextFriends(!contextFriends);
                   }}
                 >
                   Delete friend
@@ -84,8 +166,9 @@ export function FriendsContainer() {
                       <AllUsers.Text>{el.email}</AllUsers.Text>
                     </AllUsers.Group>
                     <AllUsers.ButtonAdd
-                      onClick={() => {
-                        setContextFriends(el);
+                      onClick={async () => {
+                        await setFriend(el);
+                        setContextFriends(!contextFriends);
                       }}
                     >
                       Add friend

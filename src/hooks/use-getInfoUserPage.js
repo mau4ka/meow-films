@@ -1,13 +1,16 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ContextUserPage } from "../context/contextUserPage";
 import { FirebaseContext } from "../context/firebase";
 
-export default function useGetInfoUserPage() {
-  const [getLike, setGetLike] = useState(null);
+export default function useGetLiked() {
+  const [getInfo, setGetInfo] = useState(null);
+
+  const [contextUser, setContextUser] = useContext(ContextUserPage);
 
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
 
-  if (!getLike) {
+  useEffect(() => {
     let userEmail = user.email;
     firebase
       .firestore()
@@ -24,7 +27,7 @@ export default function useGetInfoUserPage() {
           );
           const data = doc.data();
 
-          setGetLike(data);
+          setGetInfo(data);
         } else {
           console.log("No info about user");
         }
@@ -32,6 +35,6 @@ export default function useGetInfoUserPage() {
       .catch(function (error) {
         console.log("Error getting document:", error);
       });
-  }
-  return getLike;
+  }, [contextUser]);
+  return getInfo;
 }

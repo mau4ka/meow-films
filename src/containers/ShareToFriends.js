@@ -29,8 +29,9 @@ export function ShareToFriendsContainer({ show }) {
                   recommended: [show],
                   recommendedId: [show.id],
                 });
+              alert("Shared!");
             } else if (doc.data().recommendedId.indexOf(show.id) !== -1) {
-              console.log("Already shared");
+              alert("This user know about this film!");
             } else if (
               Array.isArray(doc.data().recommended) &&
               Array.isArray(doc.data().recommendedId)
@@ -44,6 +45,7 @@ export function ShareToFriendsContainer({ show }) {
                   recommended: [...doc.data().recommended, show],
                   recommendedId: [...doc.data().recommendedId, show.id],
                 });
+              alert("Shared!");
             } else {
               console.log("NO arrays");
               firebase
@@ -54,6 +56,7 @@ export function ShareToFriendsContainer({ show }) {
                   recommended: [doc.data().recommended, show],
                   recommendedId: [doc.data().recommendedId, show.id],
                 });
+              alert("Shared!");
             }
           } else {
             console.log("No info about user");
@@ -66,6 +69,7 @@ export function ShareToFriendsContainer({ show }) {
                 recommended: [show],
                 recommendedId: [show.id],
               });
+            alert("Shared!");
           }
         })
         .catch(function (error) {

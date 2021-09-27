@@ -1,9 +1,7 @@
-import React, { useState, useContext, createContext } from "react";
+import React from "react";
 
 import no_image from "../../no_image.png";
 import * as ROUTES from "../../constants/routes";
-import heart from "../../heart.svg";
-import heartLiked from "../../heartLiked.svg";
 
 import {
   Container,
@@ -19,11 +17,14 @@ import {
   GroupRow,
   Button,
 } from "./cardStyles";
-import useSetLike from "../../hooks/use-setLike";
 
 export default function Cards({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
 }
+
+Cards.Container = function CardsGroup({ children, ...restProps }) {
+  return <div {...restProps}>{children}</div>;
+};
 
 Cards.Group = function CardsGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
@@ -92,14 +93,6 @@ Cards.OneItem = function CardsImage({ children, item, liked, ...restProps }) {
           <Cards.SubTitle>{item.name}</Cards.SubTitle>
           <Cards.Text>Language: {item.language}</Cards.Text>
           <Cards.Text>Status: {item.status}</Cards.Text>
-          {liked !== null &&
-          liked !== undefined &&
-          liked.likesId &&
-          liked.likesId.indexOf(item.id) !== -1 ? (
-            <Cards.Text>You can dislike</Cards.Text>
-          ) : (
-            <Cards.Text>You can like</Cards.Text>
-          )}
         </Cards.Column>
         {children}
       </Cards.GroupSpace>
