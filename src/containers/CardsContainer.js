@@ -5,7 +5,7 @@ import heart from "../heart.svg";
 import heartLiked from "../heartLiked.svg";
 import useApiAllShows from "../hooks/use-api-all-shows";
 import { ContextLikes } from "../context/contextLikes";
-import { useContext } from "react/cjs/react.development";
+import { useContext } from "react";
 import useGetLiked from "../hooks/use-getLiked";
 import { FirebaseContext } from "../context/firebase";
 

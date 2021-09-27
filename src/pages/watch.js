@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useContext } from "react/cjs/react.development";
+import { useContext } from "react";
 import { WatchContainer } from "../containers/WatchContainer";
 import { ContextLikes } from "../context/contextLikes";
 import { FirebaseContext } from "../context/firebase";
