@@ -140,52 +140,54 @@ export default function User() {
       <Header.Button onClick={() => (window.location.href = ROUTES.FRIENDS)}>
         Go to friend list
       </Header.Button>
-
-      {info && info.likes ? (
-        <Cards>
-          <Cards.Title>Liked</Cards.Title>
-          <Cards.GroupRow>
-            {info.likes.map((item) => (
-              <Cards.Container key={item.id}>
-                <Cards.OneItem item={item}>
+      <Cards.Box>
+        <Cards.Title>Liked</Cards.Title>
+        {info && info.likes && info.likes.length !== 0 ? (
+          <Cards>
+            <Cards.GroupRow>
+              {info.likes.map((item) => (
+                <Cards.Container key={item.id}>
+                  <Cards.OneItem item={item}>
+                    <Cards.Heart
+                      onClick={async (el) => {
+                        await deleteLike(item);
+                        setContextUserPage(!contextUserPage);
+                      }}
+                      src={heartLiked}
+                      alt="heart"
+                    ></Cards.Heart>
+                  </Cards.OneItem>
+                </Cards.Container>
+              ))}
+            </Cards.GroupRow>
+          </Cards>
+        ) : (
+          <Cards.Title style={{ color: "red" }}>No liked shows</Cards.Title>
+        )}
+        <Cards.Title>Recommended by friends</Cards.Title>
+        {info && info.recommended && info.recommended.length !== 0 ? (
+          <Cards>
+            <Cards.GroupRow>
+              {info.recommended.map((item) => (
+                <Cards.OneItem item={item} key={item.id}>
                   <Cards.Heart
                     onClick={async (el) => {
-                      await deleteLike(item);
+                      await deleteRecommend(item);
                       setContextUserPage(!contextUserPage);
                     }}
-                    src={heartLiked}
+                    src={deleteButton}
                     alt="heart"
                   ></Cards.Heart>
                 </Cards.OneItem>
-              </Cards.Container>
-            ))}
-          </Cards.GroupRow>
-        </Cards>
-      ) : (
-        <div>loading...</div>
-      )}
-
-      {info && info.recommended ? (
-        <Cards>
-          <Cards.Title>Recommended by friends</Cards.Title>
-          <Cards.GroupRow>
-            {info.recommended.map((item) => (
-              <Cards.OneItem item={item} key={item.id}>
-                <Cards.Heart
-                  onClick={async (el) => {
-                    await deleteRecommend(item);
-                    setContextUserPage(!contextUserPage);
-                  }}
-                  src={deleteButton}
-                  alt="heart"
-                ></Cards.Heart>
-              </Cards.OneItem>
-            ))}
-          </Cards.GroupRow>
-        </Cards>
-      ) : (
-        <div>loading...</div>
-      )}
+              ))}
+            </Cards.GroupRow>
+          </Cards>
+        ) : (
+          <Cards.Title style={{ color: "red" }}>
+            No recommended shows
+          </Cards.Title>
+        )}
+      </Cards.Box>
     </>
   );
 }

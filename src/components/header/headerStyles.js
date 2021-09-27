@@ -213,7 +213,7 @@ export const PlayButton = styled.button`
 export const Button = styled.button`
   background-color: red;
   color: black;
-  margin: 50px 10px 0 10px;
+  margin: 50px 10px 0 50px;
   border-width: 0;
   padding: 10px 20px;
   border-radius: 5px;

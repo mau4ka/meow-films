@@ -80,7 +80,9 @@ export function ShareToFriendsContainer({ show }) {
 
   return (
     <>
-      {friendsList && friendsList.friends ? (
+      {friendsList &&
+      friendsList.friends &&
+      friendsList.friends.length !== 0 ? (
         <>
           <AllUsers.BigTitle>Share to your friends</AllUsers.BigTitle>
           <AllUsers>

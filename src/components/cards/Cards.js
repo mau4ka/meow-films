@@ -16,6 +16,7 @@ import {
   GroupSpace,
   GroupRow,
   Button,
+  Box,
 } from "./cardStyles";
 
 export default function Cards({ children, ...restProps }) {
@@ -24,6 +25,10 @@ export default function Cards({ children, ...restProps }) {
 
 Cards.Container = function CardsGroup({ children, ...restProps }) {
   return <div {...restProps}>{children}</div>;
+};
+
+Cards.Box = function CardsBox({ children, ...restProps }) {
+  return <Box {...restProps}>{children}</Box>;
 };
 
 Cards.Group = function CardsGroup({ children, ...restProps }) {

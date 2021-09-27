@@ -15,6 +15,11 @@ export const Container = styled.div`
   margin: 50px;
 `;
 
+export const Box = styled.div`
+  display: block;
+  padding-bottom: 50px;
+`;
+
 export const Group = styled.div`
   display: flex;
   justify-content: center;

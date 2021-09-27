@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext } from "react";
 
-import { Container, Group, Title, Text, Image, Link } from "./showStyles";
+import { Container, Group, Title, Box, Text, Image, Link } from "./showStyles";
 
 export default function Show({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
@@ -8,6 +8,10 @@ export default function Show({ children, ...restProps }) {
 
 Show.Group = function ShowGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
+};
+
+Show.Box = function ShowBox({ children, ...restProps }) {
+  return <Box {...restProps}>{children}</Box>;
 };
 
 Show.Title = function ShowTitle({ children, ...restProps }) {

@@ -54,38 +54,35 @@ export default function ShowPage(props) {
           </Header.Group>
         </Header.Frame>
       </Header>
+      <Show.Box>
+        {show.length !== 0 ? (
+          <Show>
+            {!show.image || !show.image.original ? (
+              <Show.Image src={no_image} alt="no-image" />
+            ) : (
+              <Show.Image src={show.image.original} alt={show.name} />
+            )}
+            <Show.Group>
+              <Show.Title>{show.name}</Show.Title>
+              <Show.Text>Language: {show.language}</Show.Text>
+              <Show.Text>Status: {show.status}</Show.Text>
+              <Show.Text>Type: {show.type}</Show.Text>
+              {show.genres ? (
+                <Show.Text>Genres: {show.genres.join(", ")}</Show.Text>
+              ) : null}
+              {show.summary ? (
+                <Show.Text>{show.summary.replace(/<[^>]*>/g, " ")}</Show.Text>
+              ) : null}
 
-      {show.length !== 0 ? (
-        <Show>
-          {!show.image || !show.image.original ? (
-            <Show.Image src={no_image} alt="no-image" />
-          ) : (
-            <Show.Image src={show.image.original} alt={show.name} />
-          )}
-          <Show.Group>
-            <Show.Title>{show.name}</Show.Title>
-            <Show.Text>Language: {show.language}</Show.Text>
-            <Show.Text>Status: {show.status}</Show.Text>
-            <Show.Text>Type: {show.type}</Show.Text>
-            {show.genres ? (
-              <Show.Text>Genres: {show.genres.join(", ")}</Show.Text>
-            ) : null}
-            {show.summary ? (
-              <Show.Text>{show.summary.replace(/<[^>]*>/g, " ")}</Show.Text>
-            ) : null}
+              <Show.Link href={show.url}>Watch on tvmaze</Show.Link>
+            </Show.Group>
+          </Show>
+        ) : (
+          <Show.Title>Nothing found</Show.Title>
+        )}
 
-            <Show.Link href={show.url}>Watch on tvmaze</Show.Link>
-          </Show.Group>
-        </Show>
-      ) : (
-        <Show.Title>Nothing found</Show.Title>
-      )}
-
-      {user && user.email ? (
-        <ShareToFriendsContainer show={show} />
-      ) : (
-        <Show.Title>{show.name}</Show.Title>
-      )}
+        {user && user.email ? <ShareToFriendsContainer show={show} /> : null}
+      </Show.Box>
     </>
   );
 }

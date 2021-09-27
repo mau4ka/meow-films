@@ -30,6 +30,11 @@ export const Text = styled.p`
   line-height: normal;
 `;
 
+export const Box = styled.div`
+  display: block;
+  padding-bottom: 50px;
+`;
+
 export const Link = styled.a`
   margin-top: 5px;
   padding: 10px;
