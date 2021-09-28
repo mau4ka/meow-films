@@ -2,13 +2,13 @@ import React, { useContext } from "react";
 import { AllUsers } from "../components";
 import { FirebaseContext } from "../context/firebase";
 import useGetAllUsers from "../hooks/use-getUsers";
-import useGetFriend from "../hooks/use-getFriends";
 import { ContextFriends } from "../context/contextFriends";
+import useInfoUser from "../hooks/use-getInfoUser";
 
 export function FriendsContainer() {
   const [contextFriends, setContextFriends] = useContext(ContextFriends);
 
-  let friendsList = useGetFriend();
+  let friendsList = useInfoUser('friends');
 
   if (friendsList) {
     console.log(friendsList);

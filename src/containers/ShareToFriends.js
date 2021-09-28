@@ -2,11 +2,10 @@ import React from "react";
 import { useContext } from "react";
 import { AllUsers } from "../components";
 import { FirebaseContext } from "../context/firebase";
-
-import useGetFriendShare from "../hooks/use-getFriendsShare";
+import useInfoUser from "../hooks/use-getInfoUser";
 
 export function ShareToFriendsContainer({ show }) {
-  let friendsList = useGetFriendShare();
+  let friendsList = useInfoUser('friendsShare')
   const { firebase } = useContext(FirebaseContext);
   const handleShare = (who) => {
     console.log("mau share");

@@ -6,11 +6,11 @@ import logo from "../meowLogo.png";
 import heartLiked from "../heartLiked.svg";
 import deleteButton from "../DeleteButton.svg";
 import { ContextUserPage } from "../context/contextUserPage";
-import useGetInfoUserPage from "../hooks/use-getInfoUserPage";
+import useInfoUser from "../hooks/use-getInfoUser";
 
 export default function User() {
   const [contextUserPage, setContextUserPage] = useContext(ContextUserPage);
-  const info = useGetInfoUserPage();
+  const info = useInfoUser('userPage')
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
   const [loading, setLoading] = useState(true);

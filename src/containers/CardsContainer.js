@@ -6,11 +6,11 @@ import heartLiked from "../heartLiked.svg";
 import useApiAllShows from "../hooks/use-api-all-shows";
 import { ContextLikes } from "../context/contextLikes";
 import { useContext } from "react";
-import useGetLiked from "../hooks/use-getLiked";
 import { FirebaseContext } from "../context/firebase";
+import useInfoUser from "../hooks/use-getInfoUser";
 
 export function CardsContainer({ name, category }) {
-  const liked = useGetLiked();
+  const liked = useInfoUser('likes');
 
   const [contextLikes, setContextLikes] = useContext(ContextLikes);
   const { firebase } = useContext(FirebaseContext);

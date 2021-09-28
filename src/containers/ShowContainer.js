@@ -4,18 +4,18 @@ import * as ROUTES from "../constants/routes";
 import logo from "../meowLogo.png";
 import userHome from "../user.png";
 import { FirebaseContext } from "../context/firebase";
-import useGetLikedShow from "../hooks/use-getLikedShow";
 import useContentShow from "../hooks/use-api-show";
 import heartLiked from "../heartLiked.svg";
 import heartWhite from "../heartWhite.svg";
 import no_image from "../no_image.png";
 import { ShareToFriendsContainer } from "./ShareToFriends";
 import { ContextLikesShow } from "../context/contextLikesShow";
+import useInfoUser from "../hooks/use-getInfoUser";
 
 export function ShowContainer() {
   const [contextLikesShow, setContextLikesShow] = useContext(ContextLikesShow);
 
-  const liked = useGetLikedShow();
+  const liked = useInfoUser('likesShow')
   let num = window.location.href.split("/").pop();
   let show = useContentShow(num);
 
