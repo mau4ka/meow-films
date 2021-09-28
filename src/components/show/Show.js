@@ -1,6 +1,15 @@
 import React, { useState, useContext, createContext } from "react";
 
-import { Container, Group, Title, Box, Text, Image, Link } from "./showStyles";
+import {
+  Container,
+  Group,
+  Title,
+  Box,
+  Text,
+  Image,
+  Link,
+  Heart,
+} from "./showStyles";
 
 export default function Show({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
@@ -24,6 +33,10 @@ Show.Text = function ShowText({ children, ...restProps }) {
 
 Show.Link = function ShowLink({ children, ...restProps }) {
   return <Link {...restProps}>{children}</Link>;
+};
+
+Show.Heart = function ShowHeart({ ...restProps }) {
+  return <Heart {...restProps} />;
 };
 
 Show.Image = function ShowImage({ ...restProps }) {

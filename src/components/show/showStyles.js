@@ -12,6 +12,10 @@ export const Title = styled.h2`
 export const Container = styled.div`
   display: flex;
   margin: 50px;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `;
 
 export const Group = styled.div`
@@ -53,10 +57,22 @@ export const Image = styled.img`
   cursor: pointer;
   height: 18rem;
   padding: 0;
-  margin: 0;
+  margin: auto;
 
   &:hover {
     transform: scale(1.3);
     z-index: 99;
+  }
+`;
+
+export const Heart = styled.img`
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+
+  @media (max-width: 800px) {
+    width: 100px;
+    height: 100px;
+    margin: auto;
   }
 `;
