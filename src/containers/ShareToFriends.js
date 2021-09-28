@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { AllUsers } from "../components";
 import { FirebaseContext } from "../context/firebase";
 import useInfoUser from "../hooks/use-getInfoUser";
 
 export function ShareToFriendsContainer({ show }) {
-  let friendsList = useInfoUser('friendsShare')
+  let friendsList = useInfoUser("friendsShare");
   const { firebase } = useContext(FirebaseContext);
   const handleShare = (who) => {
     console.log("mau share");
@@ -28,9 +28,8 @@ export function ShareToFriendsContainer({ show }) {
                   recommended: [show],
                   recommendedId: [show.id],
                 });
-              alert("Shared!");
             } else if (doc.data().recommendedId.indexOf(show.id) !== -1) {
-              alert("This user know about this film!");
+              console.log("This user know about this film!");
             } else if (
               Array.isArray(doc.data().recommended) &&
               Array.isArray(doc.data().recommendedId)
@@ -44,7 +43,6 @@ export function ShareToFriendsContainer({ show }) {
                   recommended: [...doc.data().recommended, show],
                   recommendedId: [...doc.data().recommendedId, show.id],
                 });
-              alert("Shared!");
             } else {
               console.log("NO arrays");
               firebase
@@ -55,7 +53,6 @@ export function ShareToFriendsContainer({ show }) {
                   recommended: [doc.data().recommended, show],
                   recommendedId: [doc.data().recommendedId, show.id],
                 });
-              alert("Shared!");
             }
           } else {
             console.log("No info about user");
@@ -68,13 +65,20 @@ export function ShareToFriendsContainer({ show }) {
                 recommended: [show],
                 recommendedId: [show.id],
               });
-            alert("Shared!");
           }
         })
         .catch(function (error) {
           console.log("Error getting document:", error);
         });
     }
+  };
+
+  const [displayAl, setDisplayAl] = useState("none");
+  let display = () => {
+    setDisplayAl("block");
+    setTimeout(() => {
+      setDisplayAl("none");
+    }, 2000);
   };
 
   return (
@@ -84,6 +88,9 @@ export function ShareToFriendsContainer({ show }) {
       friendsList.friends.length !== 0 ? (
         <>
           <AllUsers.BigTitle>Share to your friends</AllUsers.BigTitle>
+          <AllUsers.Box display={displayAl}>
+            <AllUsers.Alert>Shared!</AllUsers.Alert>
+          </AllUsers.Box>
           <AllUsers>
             <AllUsers.GroupRow wrap="nowrap" overflow="auto" justify="start">
               {friendsList.friends.map((el) => (
@@ -100,6 +107,7 @@ export function ShareToFriendsContainer({ show }) {
                     onClick={(e) => {
                       e.preventDefault();
                       handleShare(el.email);
+                      display();
                     }}
                   >
                     Share

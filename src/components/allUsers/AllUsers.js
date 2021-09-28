@@ -11,6 +11,8 @@ import {
   GroupRow,
   ButtonDelete,
   BigTitle,
+  Alert,
+  Box,
 } from "./allUsersStyles";
 
 export default function AllUsers({ children, ...restProps }) {
@@ -19,6 +21,14 @@ export default function AllUsers({ children, ...restProps }) {
 
 AllUsers.Group = function AllUsersGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
+};
+
+AllUsers.Box = function AllUsersBox({ children, ...restProps }) {
+  return <Box {...restProps}>{children}</Box>;
+};
+
+AllUsers.Alert = function AllUsersAlert({ children, ...restProps }) {
+  return <Alert {...restProps}>{children}</Alert>;
 };
 
 AllUsers.GroupRow = function AllUsersGroupRow({ children, ...restProps }) {

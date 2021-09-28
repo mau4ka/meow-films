@@ -19,6 +19,12 @@ export const Container = styled.div`
   margin: 20px 50px;
 `;
 
+export const Box = styled.div`
+  display: ${({ display }) => display};
+  text-align: center;
+  padding-top: 20px;
+`;
+
 export const Group = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -80,6 +86,15 @@ export const Item = styled.div`
   margin: 10px;
   min-width: 250px;
   text-align: center;
+`;
+
+export const Alert = styled.h2`
+  display: inline-block;
+  padding: 10px;
+  border: 2px solid grey;
+  margin: auto;
+  min-width: 250px;
+  color: red;
 `;
 
 export const Text = styled.p`
