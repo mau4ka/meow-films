@@ -172,7 +172,7 @@ export function CardsContainer({ name, category }) {
                 >
                   <Cards.Heart
                     onClick={async (el) => {
-                      await setLike(item);
+                      await setLike(item.show);
                       setContextLikes(!contextLikes);
                     }}
                     src={

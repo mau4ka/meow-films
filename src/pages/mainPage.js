@@ -4,6 +4,7 @@ import { BigBlocksContainer } from "../containers/BigBlocksContainer";
 import { FooterContainer } from "../containers/FooterContainer";
 import { HeaderContainer } from "../containers/HeaderContainer";
 import { QuestionsContainer } from "../containers/QuestionsContainer";
+import * as ROUTES from "../constants/routes";
 
 export default function MainPage() {
   return (
@@ -17,13 +18,13 @@ export default function MainPage() {
             Watch anywhere. Cancel at any time.
           </HeaderText.SubTitle>
           <FastRegForm>
-            <FastRegForm.Input placeholder="Email address" />
-            <FastRegForm.Button>Try it now</FastRegForm.Button>
+            <FastRegForm.Button
+              onClick={() => (window.location.href = ROUTES.REGISTER)}
+            >
+              Try it now
+            </FastRegForm.Button>
             <FastRegForm.Break />
-            <FastRegForm.Text>
-              Ready to watch? Enter your email to create or restart your
-              membership.
-            </FastRegForm.Text>
+            <FastRegForm.Text>Ready to watch? Press button!</FastRegForm.Text>
           </FastRegForm>
         </HeaderText>
       </HeaderContainer>

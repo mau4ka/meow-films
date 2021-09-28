@@ -1,13 +1,9 @@
 import React from "react";
-import { Container, Input, Break, Button, Text } from "./fastRegFormStyles";
+import { Container, Break, Button, Text } from "./fastRegFormStyles";
 
 export default function FastRegForm({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
 }
-
-FastRegForm.Input = function FastRegFormInput({ ...restProps }) {
-  return <Input {...restProps} />;
-};
 
 FastRegForm.Button = function FastRegFormButton({ children, ...restProps }) {
   return (

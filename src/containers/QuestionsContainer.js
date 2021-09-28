@@ -2,6 +2,7 @@ import React from "react";
 import { Questions } from "../components";
 import { FastRegForm } from "../components";
 import questionsData from "../infoForMainPage/questionsData.json";
+import * as ROUTES from "../constants/routes";
 
 export function QuestionsContainer() {
   return (
@@ -17,12 +18,13 @@ export function QuestionsContainer() {
       </Questions.Frame>
 
       <FastRegForm>
-        <FastRegForm.Input placeholder="Email address" />
-        <FastRegForm.Button>Try it now</FastRegForm.Button>
+        <FastRegForm.Button
+          onClick={() => (window.location.href = ROUTES.REGISTER)}
+        >
+          Try it now
+        </FastRegForm.Button>
         <FastRegForm.Break />
-        <FastRegForm.Text>
-          Ready to watch? Enter your email to create or restart your membership.
-        </FastRegForm.Text>
+        <FastRegForm.Text>Ready to watch? Press button!</FastRegForm.Text>
       </FastRegForm>
     </Questions>
   );
