@@ -1,5 +1,5 @@
-import React, {  useContext } from "react";
-import {  Header, Show } from "../components";
+import React, { useContext } from "react";
+import { Header, Show } from "../components";
 import * as ROUTES from "../constants/routes";
 import logo from "../meowLogo.png";
 import userHome from "../user.png";
@@ -11,11 +11,12 @@ import no_image from "../no_image.png";
 import { ShareToFriendsContainer } from "./ShareToFriends";
 import { ContextLikesShow } from "../context/contextLikesShow";
 import useInfoUser from "../hooks/use-getInfoUser";
+import { FooterContainer } from "./FooterContainer";
 
 export function ShowContainer() {
   const [contextLikesShow, setContextLikesShow] = useContext(ContextLikesShow);
 
-  const liked = useInfoUser('likesShow')
+  const liked = useInfoUser("likesShow");
   let num = window.location.href.split("/").pop();
   let show = useContentShow(num);
 
@@ -181,6 +182,7 @@ export function ShowContainer() {
 
         {user && user.email ? <ShareToFriendsContainer show={show} /> : null}
       </Show.Box>
+      <FooterContainer />
     </>
   );
 }

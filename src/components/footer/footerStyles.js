@@ -2,13 +2,13 @@ import styled from "styled-components/macro";
 
 export const Container = styled.div`
   display: flex;
-  padding: 70px 0;
+  padding: 20px 0 65px 0;
   margin: auto;
   max-width: 1000px;
   flex-direction: column;
 
   @media (max-width: 1000px) {
-    padding: 70px 30px;
+    padding: 65px 30px;
   }
 `;
 
@@ -44,7 +44,14 @@ export const Title = styled.p`
 export const Text = styled.p`
   font-size: 13px;
   color: #757575;
-  margin-bottom: 40px;
+  margin: 0 0 20px 0;
+`;
+
+export const LastText = styled.p`
+  text-align: center;
+  font-size: 14px;
+  color: #757575;
+  margin: 20px 0 50px 0;
 `;
 
 export const Break = styled.div`

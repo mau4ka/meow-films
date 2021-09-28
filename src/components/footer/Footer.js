@@ -6,6 +6,7 @@ import {
   Link,
   Row,
   Text,
+  LastText,
   Title,
 } from "./footerStyles";
 
@@ -31,6 +32,10 @@ Footer.Title = function FooterTitle({ children, ...restProps }) {
 
 Footer.Text = function FooterText({ children, ...restProps }) {
   return <Text {...restProps}>{children}</Text>;
+};
+
+Footer.LastText = function FooterLastText({ children, ...restProps }) {
+  return <LastText {...restProps}>{children}</LastText>;
 };
 
 Footer.Break = function FooterBreak({ ...restProps }) {

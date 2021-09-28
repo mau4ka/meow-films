@@ -4,11 +4,12 @@ import { FirebaseContext } from "../context/firebase";
 import useGetAllUsers from "../hooks/use-getUsers";
 import { ContextFriends } from "../context/contextFriends";
 import useInfoUser from "../hooks/use-getInfoUser";
+import { FooterContainer } from "./FooterContainer";
 
 export function FriendsContainer() {
   const [contextFriends, setContextFriends] = useContext(ContextFriends);
 
-  let friendsList = useInfoUser('friends');
+  let friendsList = useInfoUser("friends");
 
   if (friendsList) {
     console.log(friendsList);
@@ -181,6 +182,7 @@ export function FriendsContainer() {
       ) : (
         <AllUsers.Title>You add all users to your friends</AllUsers.Title>
       )}
+      <FooterContainer />
     </>
   );
 }

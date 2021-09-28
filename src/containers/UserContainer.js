@@ -7,10 +7,11 @@ import heartLiked from "../heartLiked.svg";
 import deleteButton from "../DeleteButton.svg";
 import { ContextUserPage } from "../context/contextUserPage";
 import useInfoUser from "../hooks/use-getInfoUser";
+import { FooterContainer } from "./FooterContainer";
 
 export default function User() {
   const [contextUserPage, setContextUserPage] = useContext(ContextUserPage);
-  const info = useInfoUser('userPage')
+  const info = useInfoUser("userPage");
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
   const [loading, setLoading] = useState(true);
@@ -188,6 +189,7 @@ export default function User() {
           </Cards.Title>
         )}
       </Cards.Box>
+      <FooterContainer />
     </>
   );
 }
