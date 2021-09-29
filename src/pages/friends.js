@@ -49,11 +49,9 @@ export default function FriendsPage() {
                 </Header.Group>
               </Header.Frame>
             </Header>
-            <FriendsContainer />
+            <FriendsContainer user={user} />
           </div>
-        ) : (
-          <div>mau</div>
-        )}
+        ) : null}
       </ContextFriends.Provider>
     </>
   );

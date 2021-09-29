@@ -8,8 +8,6 @@ export function ShareToFriendsContainer({ show }) {
   let friendsList = useInfoUser("friendsShare");
   const { firebase } = useContext(FirebaseContext);
   const handleShare = (who) => {
-    console.log("mau share");
-
     if (show && who) {
       firebase
         .firestore()
@@ -18,7 +16,6 @@ export function ShareToFriendsContainer({ show }) {
         .get()
         .then(function (doc) {
           if (doc.exists) {
-            console.log("Document data:", doc.data());
             if (!doc.data().recommended) {
               firebase
                 .firestore()
@@ -34,7 +31,6 @@ export function ShareToFriendsContainer({ show }) {
               Array.isArray(doc.data().recommended) &&
               Array.isArray(doc.data().recommendedId)
             ) {
-              console.log("Is arrays");
               firebase
                 .firestore()
                 .collection("userPages")
@@ -44,7 +40,6 @@ export function ShareToFriendsContainer({ show }) {
                   recommendedId: [...doc.data().recommendedId, show.id],
                 });
             } else {
-              console.log("NO arrays");
               firebase
                 .firestore()
                 .collection("userPages")
@@ -55,8 +50,6 @@ export function ShareToFriendsContainer({ show }) {
                 });
             }
           } else {
-            console.log("No info about user");
-
             firebase
               .firestore()
               .collection("userPages")

@@ -6,10 +6,8 @@ import { ContextLikesShow } from "../context/contextLikesShow";
 import { ShowContainer } from "../containers/ShowContainer";
 
 export default function ShowPage(props) {
-  console.log(window.location.href.split("/").pop());
   let num = window.location.href.split("/").pop();
   let show = useContentShow(num);
-  console.log(show);
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
   const [loading, setLoading] = useState(true);
@@ -29,7 +27,7 @@ export default function ShowPage(props) {
   return (
     <ContextLikesShow.Provider value={[contextLikesShow, setContextLikesShow]}>
       {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
-      {user && userEmail ? <ShowContainer /> : null}
+      {user && userEmail ? <ShowContainer user={user} /> : null}
     </ContextLikesShow.Provider>
   );
 }

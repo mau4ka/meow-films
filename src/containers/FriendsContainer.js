@@ -6,18 +6,12 @@ import { ContextFriends } from "../context/contextFriends";
 import useInfoUser from "../hooks/use-getInfoUser";
 import { FooterContainer } from "./FooterContainer";
 
-export function FriendsContainer() {
+export function FriendsContainer({ user }) {
   const [contextFriends, setContextFriends] = useContext(ContextFriends);
 
   let friendsList = useInfoUser("friends");
 
-  if (friendsList) {
-    console.log(friendsList);
-  }
-
   const { firebase } = useContext(FirebaseContext);
-  const user = firebase.auth().currentUser || {};
-  console.log(user);
 
   let setFriend = async (person) => {
     let userEmail = user.email;
@@ -59,13 +53,10 @@ export function FriendsContainer() {
                   friends: newFriends,
                   friendsEmails: newFriendsEmail,
                 });
-
-              console.log("Already friendship");
             } else if (
               Array.isArray(doc.data().friends) &&
               Array.isArray(doc.data().friendsEmails)
             ) {
-              console.log("Is arrays");
               firebase
                 .firestore()
                 .collection("userPages")
@@ -75,7 +66,6 @@ export function FriendsContainer() {
                   friendsEmails: [...doc.data().friendsEmails, person.email],
                 });
             } else {
-              console.log("NO arrays");
               firebase
                 .firestore()
                 .collection("userPages")
@@ -86,8 +76,6 @@ export function FriendsContainer() {
                 });
             }
           } else {
-            console.log("No info about user");
-
             firebase
               .firestore()
               .collection("userPages")
@@ -104,7 +92,6 @@ export function FriendsContainer() {
     }
   };
   const allUsers = useGetAllUsers();
-  console.log(allUsers);
 
   return (
     <>

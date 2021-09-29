@@ -9,11 +9,10 @@ import { ContextUserPage } from "../context/contextUserPage";
 import useInfoUser from "../hooks/use-getInfoUser";
 import { FooterContainer } from "./FooterContainer";
 
-export default function User() {
+export default function User({ user }) {
   const [contextUserPage, setContextUserPage] = useContext(ContextUserPage);
   const info = useInfoUser("userPage");
   const { firebase } = useContext(FirebaseContext);
-  const user = firebase.auth().currentUser || {};
   const [loading, setLoading] = useState(true);
 
   let deleteLike = async (el) => {
@@ -26,11 +25,9 @@ export default function User() {
         .get()
         .then(function (doc) {
           if (doc.exists) {
-            console.log("Document data:", doc.data(), doc.data().likes);
-            if (el.id === "" || !el.id) {
-              console.log("Bad id");
-            } else if (!doc.data().likes) {
-              console.log("Bad id");
+            console.log("Document data:", doc.data());
+            if (el.id === "" || !el.id || !doc.data().likes) {
+              console.log("Bad info");
             } else if (doc.data().likesId.indexOf(el.id) !== -1) {
               let newLikes = doc.data().likes.filter(function (number) {
                 return number.id !== el.id;
@@ -46,10 +43,8 @@ export default function User() {
                   likes: newLikes,
                   likesId: newLikesId,
                 });
-
-              console.log("Already liked");
             } else {
-              console.log("Bad id");
+              console.log("Bad info");
             }
           } else {
             console.log("No info about user");
@@ -71,11 +66,9 @@ export default function User() {
         .get()
         .then(function (doc) {
           if (doc.exists) {
-            console.log("Document data:", doc.data(), doc.data().recommended);
-            if (el.id === "" || !el.id) {
-              console.log("Bad id");
-            } else if (!doc.data().recommended) {
-              console.log("Bad id");
+            console.log("Document data:", doc.data());
+            if (el.id === "" || !el.id || !doc.data().recommended) {
+              console.log("Bad info");
             } else if (doc.data().recommendedId.indexOf(el.id) !== -1) {
               let newRec = doc.data().recommended.filter(function (number) {
                 return number.id !== el.id;
@@ -91,10 +84,8 @@ export default function User() {
                   recommended: newRec,
                   recommendedId: newRecId,
                 });
-
-              console.log("Already liked");
             } else {
-              console.log("Bad id");
+              console.log("Bad info");
             }
           } else {
             console.log("No info about user");

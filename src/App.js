@@ -1,15 +1,17 @@
 import React from "react";
-import { MainPage } from "./pages";
+import {
+  FriendsPage,
+  MainPage,
+  SignIn,
+  ShowPage,
+  UserPage,
+  WatchPage,
+  Register,
+} from "./pages";
 import * as ROUTES from "./constants/routes";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
-import { Register } from "./pages";
-import { Watch } from "./pages";
-import { SignIn } from "./pages";
 import { IsUserRedirect, ProtectedRoute } from "./helpers/routes";
 import useAuthListener from "./hooks/use-auth-listener";
-import Show from "./pages/show";
-import UserPage from "./pages/user";
-import FriendsPage from "./pages/friends";
 
 function App() {
   const { user } = useAuthListener();
@@ -32,11 +34,11 @@ function App() {
           <Register />
         </IsUserRedirect>
         <ProtectedRoute user={user} path={ROUTES.WATCH}>
-          <Watch />
+          <WatchPage />
         </ProtectedRoute>
 
         <ProtectedRoute user={user} path={ROUTES.SHOW + "/:url"}>
-          <Show />
+          <ShowPage />
         </ProtectedRoute>
 
         <ProtectedRoute user={user} path={ROUTES.USER}>

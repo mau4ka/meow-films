@@ -9,12 +9,11 @@ import { useContext } from "react";
 import { FirebaseContext } from "../context/firebase";
 import useInfoUser from "../hooks/use-getInfoUser";
 
-export function CardsContainer({ name, category }) {
-  const liked = useInfoUser('likes');
+export function CardsContainer({ name, category, user }) {
+  const liked = useInfoUser("likes");
 
   const [contextLikes, setContextLikes] = useContext(ContextLikes);
   const { firebase } = useContext(FirebaseContext);
-  const user = firebase.auth().currentUser || {};
 
   let setLike = async (el) => {
     let userEmail = user.email;
@@ -26,7 +25,7 @@ export function CardsContainer({ name, category }) {
         .get()
         .then(function (doc) {
           if (doc.exists) {
-            console.log("Document data:", doc.data(), doc.data().likes);
+            console.log("Document data:", doc.data());
             if (el.id === "" || !el.id) {
               console.log("Bad id");
             } else if (!doc.data().likes) {
@@ -76,8 +75,6 @@ export function CardsContainer({ name, category }) {
                 });
             }
           } else {
-            console.log("No info about user");
-
             firebase
               .firestore()
               .collection("userPages")
@@ -95,9 +92,6 @@ export function CardsContainer({ name, category }) {
   };
   let allShows = useApiAllShows();
   let search = useApiSearch(name);
-  console.log(name);
-
-  console.log(liked);
 
   const [loading, setLoading] = useState(true);
 

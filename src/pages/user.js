@@ -16,7 +16,7 @@ export default function UserPage(props) {
 
   return (
     <ContextUserPage.Provider value={[contextUserPage, setContextUserPage]}>
-      {user && userEmail ? <User /> : null}
+      {user && userEmail ? <User user={user} /> : null}
     </ContextUserPage.Provider>
   );
 }

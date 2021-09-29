@@ -13,7 +13,7 @@ import { ContextLikesShow } from "../context/contextLikesShow";
 import useInfoUser from "../hooks/use-getInfoUser";
 import { FooterContainer } from "./FooterContainer";
 
-export function ShowContainer() {
+export function ShowContainer({ user }) {
   const [contextLikesShow, setContextLikesShow] = useContext(ContextLikesShow);
 
   const liked = useInfoUser("likesShow");
@@ -21,7 +21,6 @@ export function ShowContainer() {
   let show = useContentShow(num);
 
   const { firebase } = useContext(FirebaseContext);
-  const user = firebase.auth().currentUser || {};
 
   let userEmail = null;
   if (user) {
@@ -38,7 +37,7 @@ export function ShowContainer() {
         .get()
         .then(function (doc) {
           if (doc.exists) {
-            console.log("Document data:", doc.data(), doc.data().likes);
+            console.log("Document data:", doc.data());
             if (el.id === "" || !el.id) {
               console.log("Bad id");
             } else if (!doc.data().likes) {
@@ -66,8 +65,6 @@ export function ShowContainer() {
                   likes: newLikes,
                   likesId: newLikesId,
                 });
-
-              console.log("Already liked");
             } else if (Array.isArray(doc.data().likes)) {
               firebase
                 .firestore()
@@ -88,8 +85,6 @@ export function ShowContainer() {
                 });
             }
           } else {
-            console.log("No info about user");
-
             firebase
               .firestore()
               .collection("userPages")

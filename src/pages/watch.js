@@ -17,7 +17,7 @@ export default function Watch() {
 
   return (
     <ContextLikes.Provider value={[contextLikes, setContextLikes]}>
-      {user && userEmail ? <WatchContainer /> : null}
+      {user && userEmail ? <WatchContainer user={user} /> : null}
     </ContextLikes.Provider>
   );
 }

@@ -8,7 +8,7 @@ import { FooterContainer } from "./FooterContainer";
 import { CardsContainer } from "./CardsContainer";
 import { ContextShow } from "../context/contextShow";
 
-export function WatchContainer() {
+export function WatchContainer({ user }) {
   const [contextShow, setContextShow] = useState(null);
 
   const [loading, setLoading] = useState(true);
@@ -17,8 +17,6 @@ export function WatchContainer() {
   const [category, setCategory] = useState(null);
 
   const { firebase } = useContext(FirebaseContext);
-  const user = firebase.auth().currentUser || {};
-  console.log(user);
 
   useEffect(() => {
     setTimeout(() => {
@@ -97,9 +95,7 @@ export function WatchContainer() {
         {contextShow === null || contextShow === "null" ? (
           <Header.Select
             onChange={({ target }) => {
-              console.log(target.value);
               setCategory(target.value);
-              console.log(contextShow);
             }}
           >
             <option value="null">All</option>
@@ -122,7 +118,7 @@ export function WatchContainer() {
           </Header.Select>
         ) : null}
 
-        <CardsContainer name={contextShow} category={category} />
+        <CardsContainer name={contextShow} category={category} user={user} />
 
         <FooterContainer />
       </ContextShow.Provider>
