@@ -21,7 +21,7 @@ export function WatchContainer({ user }) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 2000);
   }, []);
 
   return (
