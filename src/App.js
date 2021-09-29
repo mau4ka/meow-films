@@ -33,7 +33,7 @@ function App() {
         >
           <Register />
         </IsUserRedirect>
-        <ProtectedRoute user={user} path={ROUTES.WATCH}>
+        <ProtectedRoute user={user} path={ROUTES.WATCH + "/:category?"}>
           <WatchPage />
         </ProtectedRoute>
 

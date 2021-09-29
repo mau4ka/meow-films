@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { Link as ReachRouterLink } from "react-router-dom";
 import { ContextShow } from "../../context/contextShow";
+import * as ROUTES from "../../constants/routes";
+import { useHistory } from "react-router";
+
 import {
   Container,
   Group,
@@ -111,6 +114,7 @@ Header.Search = function HeaderSearch({
   const [searchActive, setSearchActive] = useState(false);
 
   const [contextShow, setContextShow] = useContext(ContextShow);
+  let myHistory = useHistory();
 
   return (
     <Search {...restProps}>
@@ -128,6 +132,7 @@ Header.Search = function HeaderSearch({
           active={searchActive}
           onClick={(e) => {
             e.preventDefault();
+            myHistory.push(ROUTES.WATCH + "/" + searchTerm);
             setContextShow(searchTerm);
           }}
         >

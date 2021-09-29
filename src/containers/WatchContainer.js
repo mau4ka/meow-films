@@ -87,6 +87,7 @@ export function WatchContainer({ user }) {
         {contextShow !== null ? (
           <Cards.Button
             onClick={() => {
+              history.push(ROUTES.WATCH + "/");
               setContextShow(null);
             }}
           >
@@ -98,6 +99,11 @@ export function WatchContainer({ user }) {
           <Header.Select
             onChange={({ target }) => {
               setCategory(target.value);
+              if (target.value === "null") {
+                history.push(ROUTES.WATCH + "/");
+              } else {
+                history.push(ROUTES.WATCH + "/" + target.value);
+              }
             }}
           >
             <option value="null">All</option>
