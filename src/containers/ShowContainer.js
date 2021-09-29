@@ -175,7 +175,9 @@ export function ShowContainer({ user }) {
           <Show.Title>Nothing found</Show.Title>
         )}
 
-        {user && user.email ? <ShareToFriendsContainer show={show} /> : null}
+        {user && user.email && show.id ? (
+          <ShareToFriendsContainer show={show} />
+        ) : null}
       </Show.Box>
       <FooterContainer />
     </>

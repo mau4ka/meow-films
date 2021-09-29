@@ -6,8 +6,7 @@ import { ContextLikesShow } from "../context/contextLikesShow";
 import { ShowContainer } from "../containers/ShowContainer";
 
 export default function ShowPage(props) {
-  let num = window.location.href.split("/").pop();
-  let show = useContentShow(num);
+  
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
   const [loading, setLoading] = useState(true);
