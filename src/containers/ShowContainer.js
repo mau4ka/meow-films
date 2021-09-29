@@ -12,8 +12,10 @@ import { ShareToFriendsContainer } from "./ShareToFriends";
 import { ContextLikesShow } from "../context/contextLikesShow";
 import useInfoUser from "../hooks/use-getInfoUser";
 import { FooterContainer } from "./FooterContainer";
+import { useHistory } from "react-router";
 
 export function ShowContainer({ user }) {
+  const history = useHistory();
   const [contextLikesShow, setContextLikesShow] = useContext(ContextLikesShow);
 
   const liked = useInfoUser("likesShow");
@@ -126,7 +128,7 @@ export function ShowContainer({ user }) {
             <Header.PictureHome
               src={userHome}
               alt="home"
-              onClick={() => (window.location.href = ROUTES.USER)}
+              onClick={() => history.push(ROUTES.USER)}
             />
           </Header.Group>
         </Header.Frame>

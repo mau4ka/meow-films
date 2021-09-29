@@ -3,8 +3,10 @@ import { Questions } from "../components";
 import { FastRegForm } from "../components";
 import questionsData from "../infoForMainPage/questionsData.json";
 import * as ROUTES from "../constants/routes";
+import { useHistory } from "react-router";
 
 export function QuestionsContainer() {
+  const history = useHistory();
   return (
     <Questions>
       <Questions.Title>Frequently Asked Questions</Questions.Title>
@@ -18,9 +20,7 @@ export function QuestionsContainer() {
       </Questions.Frame>
 
       <FastRegForm>
-        <FastRegForm.Button
-          onClick={() => (window.location.href = ROUTES.REGISTER)}
-        >
+        <FastRegForm.Button onClick={() => history.push(ROUTES.REGISTER)}>
           Try it now
         </FastRegForm.Button>
         <FastRegForm.Break />

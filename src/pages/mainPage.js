@@ -5,8 +5,10 @@ import { FooterContainer } from "../containers/FooterContainer";
 import { HeaderContainer } from "../containers/HeaderContainer";
 import { QuestionsContainer } from "../containers/QuestionsContainer";
 import * as ROUTES from "../constants/routes";
+import { useHistory } from "react-router";
 
 export default function MainPage() {
+  const history = useHistory();
   return (
     <>
       <HeaderContainer>
@@ -18,9 +20,7 @@ export default function MainPage() {
             Watch anywhere. Cancel at any time.
           </HeaderText.SubTitle>
           <FastRegForm>
-            <FastRegForm.Button
-              onClick={() => (window.location.href = ROUTES.REGISTER)}
-            >
+            <FastRegForm.Button onClick={() => history.push(ROUTES.REGISTER)}>
               Try it now
             </FastRegForm.Button>
             <FastRegForm.Break />

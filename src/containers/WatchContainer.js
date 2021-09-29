@@ -7,8 +7,10 @@ import { FirebaseContext } from "../context/firebase";
 import { FooterContainer } from "./FooterContainer";
 import { CardsContainer } from "./CardsContainer";
 import { ContextShow } from "../context/contextShow";
+import { useHistory } from "react-router";
 
 export function WatchContainer({ user }) {
+  const history = useHistory();
   const [contextShow, setContextShow] = useState(null);
 
   const [loading, setLoading] = useState(true);
@@ -56,7 +58,7 @@ export function WatchContainer({ user }) {
               <Header.PictureHome
                 src={userHome}
                 alt="home"
-                onClick={() => (window.location.href = ROUTES.USER)}
+                onClick={() => history.push(ROUTES.USER)}
               />
             </Header.Group>
           </Header.Frame>
@@ -75,7 +77,7 @@ export function WatchContainer({ user }) {
               rest of the children.
             </Header.Text>
             <Header.PlayButton
-              onClick={() => (window.location.href = `${ROUTES.SHOW}/40147`)}
+              onClick={() => history.push(`${ROUTES.SHOW}/40147`)}
             >
               More info
             </Header.PlayButton>

@@ -8,8 +8,10 @@ import deleteButton from "../DeleteButton.svg";
 import { ContextUserPage } from "../context/contextUserPage";
 import useInfoUser from "../hooks/use-getInfoUser";
 import { FooterContainer } from "./FooterContainer";
+import { useHistory } from "react-router";
 
 export default function User({ user }) {
+  const history = useHistory();
   const [contextUserPage, setContextUserPage] = useContext(ContextUserPage);
   const info = useInfoUser("userPage");
   const { firebase } = useContext(FirebaseContext);
@@ -129,7 +131,7 @@ export default function User({ user }) {
           </Header.Group>
         </Header.Frame>
       </Header>
-      <Header.Button onClick={() => (window.location.href = ROUTES.FRIENDS)}>
+      <Header.Button onClick={() => history.push(ROUTES.FRIENDS)}>
         Go to friend list
       </Header.Button>
       <Cards.Box>

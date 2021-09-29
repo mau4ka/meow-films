@@ -19,6 +19,8 @@ import {
   Box,
 } from "./cardStyles";
 
+import { useHistory } from "react-router";
+
 export default function Cards({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
 }
@@ -76,21 +78,20 @@ Cards.Button = function CardsButton({ children, ...restProps }) {
 };
 
 Cards.OneItem = function CardsImage({ children, item, liked }) {
+  const history = useHistory();
   return (
     <Cards.Item>
       {!item.image || !item.image.medium ? (
         <Cards.Image
           src={no_image}
           alt="no-image"
-          onClick={() =>
-            (window.location.href = `${ROUTES.SHOW}/${item.show.id}`)
-          }
+          onClick={() => history.push(`${ROUTES.SHOW}/${item.show.id}`)}
         />
       ) : (
         <Cards.Image
           src={item.image.original}
           alt={item.name}
-          onClick={() => (window.location.href = `${ROUTES.SHOW}/${item.id}`)}
+          onClick={() => history.push(`${ROUTES.SHOW}/${item.id}`)}
         />
       )}
       <Cards.GroupSpace>
