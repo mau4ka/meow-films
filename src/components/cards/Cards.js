@@ -75,10 +75,10 @@ Cards.Button = function CardsButton({ children, ...restProps }) {
   return <Button {...restProps}>{children}</Button>;
 };
 
-Cards.OneItem = function CardsImage({ children, item, liked, ...restProps }) {
+Cards.OneItem = function CardsImage({ children, item, liked }) {
   return (
     <Cards.Item>
-      {item.image === null || item.image.medium === null ? (
+      {!item.image || !item.image.medium ? (
         <Cards.Image
           src={no_image}
           alt="no-image"

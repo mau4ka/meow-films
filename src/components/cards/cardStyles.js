@@ -95,7 +95,6 @@ export const Text = styled.p`
 export const Image = styled.img`
   border: 0;
   width: 100%;
-  max-width: 305px;
   cursor: pointer;
   height: 18rem;
   padding: 0;
@@ -109,7 +108,6 @@ export const Button = styled.button`
   border-width: 0;
   padding: 10px 20px;
   border-radius: 5px;
-  // max-width: 130px;
   font-weight: bold;
   font-size: 20px;
   margin: 20px 0 0 20px;
