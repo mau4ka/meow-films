@@ -106,11 +106,8 @@ Header.Select = function HeaderButtonLink({ children, ...restProps }) {
   return <Select {...restProps}>{children}</Select>;
 };
 
-Header.Search = function HeaderSearch({
-  searchTerm,
-  setSearchTerm,
-  ...restProps
-}) {
+Header.Search = function HeaderSearch({ ...restProps }) {
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchActive, setSearchActive] = useState(false);
 
   const [contextShow, setContextShow] = useContext(ContextShow);
@@ -133,7 +130,7 @@ Header.Search = function HeaderSearch({
           onClick={(e) => {
             e.preventDefault();
             myHistory.push(ROUTES.WATCH + "/search/" + searchTerm);
-            setContextShow(searchTerm);
+            setContextShow(!contextShow);
           }}
         >
           &gt;

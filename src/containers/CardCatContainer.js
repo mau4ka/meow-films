@@ -88,9 +88,12 @@ export function CardCatContainer({ user, cards, liked, search }) {
 
   return (
     <>
-      {liked
-        ? search !== "true"
-          ? cards.map((item) => (
+      {liked ? (
+        search !== "true" ? (
+          cards.length === 0 ? (
+            <Cards.Title>Wait or search on next page</Cards.Title>
+          ) : (
+            cards.map((item) => (
               <Cards.OneItem item={item} liked={liked} key={item.id}>
                 <Cards.Heart
                   onClick={async (el) => {
@@ -108,25 +111,28 @@ export function CardCatContainer({ user, cards, liked, search }) {
                 ></Cards.Heart>
               </Cards.OneItem>
             ))
-          : cards.map((item) => (
-              <Cards.OneItem item={item.show} liked={liked} key={item.show.id}>
-                <Cards.Heart
-                  onClick={async (el) => {
-                    await setLike(item.show);
-                    setContextLikes(!contextLikes);
-                  }}
-                  src={
-                    liked !== null &&
-                    liked.likesId &&
-                    liked.likesId.indexOf(item.show.id) !== -1
-                      ? heartLiked
-                      : heart
-                  }
-                  alt="heart"
-                ></Cards.Heart>
-              </Cards.OneItem>
-            ))
-        : null}
+          )
+        ) : (
+          cards.map((item) => (
+            <Cards.OneItem item={item.show} liked={liked} key={item.show.id}>
+              <Cards.Heart
+                onClick={async (el) => {
+                  await setLike(item.show);
+                  setContextLikes(!contextLikes);
+                }}
+                src={
+                  liked !== null &&
+                  liked.likesId &&
+                  liked.likesId.indexOf(item.show.id) !== -1
+                    ? heartLiked
+                    : heart
+                }
+                alt="heart"
+              ></Cards.Heart>
+            </Cards.OneItem>
+          ))
+        )
+      ) : null}
     </>
   );
 }

@@ -15,10 +15,59 @@ export function WatchContainer({ user, all }) {
   const history = useHistory();
   const [contextShow, setContextShow] = useState(null);
 
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
+  let categories = [
+    "Drama",
+    "Romance",
+    "Comedy",
+    "Crime",
+    "Science-Fiction",
+    "Music",
+    "Family",
+    "Nature",
+    "Anime",
+    "Adventure",
+    "Horror",
+    "War",
+    "Mystery",
+    "Medical",
+    "Fantasy",
+    "Action",
+    "Supernatural",
+    "Food",
+    "Legal",
+    "Sports",
+  ];
 
-  const [category, setCategory] = useState(null);
+  let category = null;
+  let search = null;
+  if (window.location.href.split("watch/")[1].split("/")[0] === "search") {
+    category = null;
+    search = window.location.href.split("watch/")[1].split("/")[1];
+  } else if (window.location.href.split("page/")[1].split("/")[1] === "cat") {
+    if (
+      Number.parseInt(window.location.href.split("page/")[1].split("/")[0]) <=
+        230 &&
+      categories.includes(window.location.href.split("page/")[1].split("/")[2])
+    ) {
+      category = window.location.href.split("page/")[1].split("/")[2];
+
+      search = null;
+    } else {
+      history.push(ROUTES.WATCH + "/page/0");
+    }
+  } else if (window.location.href.split("watch/")[1].split("/")[0] === "page") {
+    let linkPage = Number.parseInt(
+      window.location.href.split("page/")[1].split("/")[0]
+    );
+    if (linkPage > 230 || isNaN(linkPage)) {
+      history.push(ROUTES.WATCH + "/page/0");
+    }
+  }
+
+  window.addEventListener("popstate", (event) => {
+    setContextPage(!contextPage);
+    setContextShow(!contextShow);
+  });
 
   const { firebase } = useContext(FirebaseContext);
 
@@ -33,15 +82,8 @@ export function WatchContainer({ user, all }) {
   let prev = Number.parseInt(numb) - 1;
   let next = Number.parseInt(numb) + 1;
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
-
   return (
     <>
-      {/* {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />} */}
       <ContextShow.Provider value={[contextShow, setContextShow]}>
         <Header src="neverland.png" dontShowOnSmallViewPort>
           <Header.Frame>
@@ -49,10 +91,7 @@ export function WatchContainer({ user, all }) {
               <Header.Logo to={ROUTES.MAIN} src={logo} alt="Netflix" />
             </Header.Group>
             <Header.Group>
-              <Header.Search
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-              />
+              <Header.Search />
               <Header.Profile>
                 <Header.Picture src={user.photoURL} />
 
@@ -97,7 +136,7 @@ export function WatchContainer({ user, all }) {
           </Header.Feature>
         </Header>
 
-        {contextShow !== null ? (
+        {search !== null ? (
           <Cards.Button
             onClick={() => {
               history.push(ROUTES.WATCH + "/");
@@ -108,10 +147,11 @@ export function WatchContainer({ user, all }) {
           </Cards.Button>
         ) : null}
 
-        {contextShow === null || contextShow === "null" ? (
+        {search === null || search === "null" ? (
           <Header.Select
             onChange={({ target }) => {
-              setCategory(target.value);
+              // setCategory(target.value);
+              setContextPage(!contextPage);
               if (target.value === "null") {
                 history.push(ROUTES.WATCH + "/");
               } else {
@@ -122,27 +162,16 @@ export function WatchContainer({ user, all }) {
             }}
           >
             <option value="null">All</option>
-            <option value="Drama">Drama</option>
-            <option value="Romance">Romance</option>
-            <option value="Comedy">Comedy</option>
-            <option value="Crime">Crime</option>
-            <option value="Triller">Thriller</option>
-            <option value="Science">Science</option>
-            <option value="Music">Music</option>
-            <option value="Family">Family</option>
-            <option value="Nature">Nature</option>
-            <option value="Anime">Anime</option>
-            <option value="Adventure">Adventure</option>
-            <option value="Horror">Horror</option>
-            <option value="War">War</option>
-            <option value="Mystery">Mystery</option>
-            <option value="Medical">Medical</option>
-            <option value="Fantasy">Fantasy</option>
+            {categories.map((el) => (
+              <option key={el} value={el}>
+                {el}
+              </option>
+            ))}
           </Header.Select>
         ) : null}
 
         <CardsContainer
-          name={contextShow}
+          name={search}
           category={category}
           user={user}
           all={all}
