@@ -8,8 +8,10 @@ import { FooterContainer } from "./FooterContainer";
 import { CardsContainer } from "./CardsContainer";
 import { ContextShow } from "../context/contextShow";
 import { useHistory } from "react-router";
+import { ContextPage } from "../context/contextPage";
 
-export function WatchContainer({ user }) {
+export function WatchContainer({ user, all }) {
+  const [contextPage, setContextPage] = useContext(ContextPage);
   const history = useHistory();
   const [contextShow, setContextShow] = useState(null);
 
@@ -20,6 +22,17 @@ export function WatchContainer({ user }) {
 
   const { firebase } = useContext(FirebaseContext);
 
+  let numb;
+  if (all === "0") {
+    numb = "";
+  } else if (all === "1") {
+    numb = window.location.href.split("page/")[1].split("/")[0];
+  }
+  console.log(numb);
+
+  let prev = Number.parseInt(numb) - 1;
+  let next = Number.parseInt(numb) + 1;
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -28,7 +41,7 @@ export function WatchContainer({ user }) {
 
   return (
     <>
-      {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
+      {/* {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />} */}
       <ContextShow.Provider value={[contextShow, setContextShow]}>
         <Header src="neverland.png" dontShowOnSmallViewPort>
           <Header.Frame>
@@ -102,7 +115,9 @@ export function WatchContainer({ user }) {
               if (target.value === "null") {
                 history.push(ROUTES.WATCH + "/");
               } else {
-                history.push(ROUTES.WATCH + "/" + target.value);
+                history.push(
+                  ROUTES.WATCH + "/page/" + numb + "/cat/" + target.value
+                );
               }
             }}
           >
@@ -126,7 +141,43 @@ export function WatchContainer({ user }) {
           </Header.Select>
         ) : null}
 
-        <CardsContainer name={contextShow} category={category} user={user} />
+        <CardsContainer
+          name={contextShow}
+          category={category}
+          user={user}
+          all={all}
+          numb={numb}
+        />
+        <Cards.Group>
+          <Cards.Button
+            onClick={() => {
+              if (category) {
+                history.push(
+                  ROUTES.WATCH + "/page/" + prev + "/cat/" + category
+                );
+              } else {
+                history.push(ROUTES.WATCH + "/page/" + prev);
+              }
+              setContextPage(!contextPage);
+            }}
+          >
+            Prev
+          </Cards.Button>
+          <Cards.Button
+            onClick={() => {
+              if (category) {
+                history.push(
+                  ROUTES.WATCH + "/page/" + next + "/cat/" + category
+                );
+              } else {
+                history.push(ROUTES.WATCH + "/page/" + next);
+              }
+              setContextPage(!contextPage);
+            }}
+          >
+            Next
+          </Cards.Button>
+        </Cards.Group>
 
         <FooterContainer />
       </ContextShow.Provider>

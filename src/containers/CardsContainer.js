@@ -4,20 +4,22 @@ import useApiSearch from "../hooks/use-api-search";
 import useApiAllShows from "../hooks/use-api-all-shows";
 import useInfoUser from "../hooks/use-getInfoUser";
 import { CardCatContainer } from "./CardCatContainer";
+import { useHistory } from "react-router";
 
-export function CardsContainer({ name, category, user }) {
+export function CardsContainer({ name, category, user, numb }) {
   const liked = useInfoUser("likes");
 
-  let allShows = useApiAllShows();
+  let allShows = useApiAllShows(numb);
+  console.log(numb);
   let search = useApiSearch(name);
-
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   }, []);
+
+  const [loading, setLoading] = useState(true);
 
   return (
     <>

@@ -33,9 +33,26 @@ function App() {
         >
           <Register />
         </IsUserRedirect>
-        <ProtectedRoute user={user} path={ROUTES.WATCH + "/:category?"}>
-          <WatchPage />
+
+        <ProtectedRoute exact user={user} path={ROUTES.WATCH + "/search/:id"}>
+          <WatchPage all="0" />
         </ProtectedRoute>
+
+        <ProtectedRoute
+          exact
+          user={user}
+          path={ROUTES.WATCH + "/page/:id/:type?/:name?"}
+        >
+          <WatchPage all="1" />
+        </ProtectedRoute>
+
+        <IsUserRedirect
+          user={user}
+          loggedInPath={ROUTES.WATCH + "/page/0"}
+          path={ROUTES.WATCH}
+        >
+          <WatchPage all="1" />
+        </IsUserRedirect>
 
         <ProtectedRoute user={user} path={ROUTES.SHOW + "/:url"}>
           <ShowPage />
