@@ -5,6 +5,8 @@ import "firebase/compat/firestore";
 const config = {
   apiKey: "AIzaSyB2e0515TxOAZ3ZHHnJg1iPBegWdnDcpQ0",
   authDomain: "meowfilms.firebaseapp.com",
+  databaseURL:
+    "https://meowfilms-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "meowfilms",
   storageBucket: "meowfilms.appspot.com",
   messagingSenderId: "941993200992",

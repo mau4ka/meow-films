@@ -37,6 +37,10 @@ export default function Register() {
               name: firstName,
               photo: photo,
             });
+            firebase.firestore().collection("userPages").doc(email).set({
+              recomended: [],
+              recomendedId: [],
+            });
             history.push(ROUTES.WATCH);
           })
       )
