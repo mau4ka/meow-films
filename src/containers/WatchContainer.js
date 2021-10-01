@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Cards, Header, Loading } from "../components";
+import React, { useState, useContext } from "react";
+import { Cards, Header } from "../components";
 import * as ROUTES from "../constants/routes";
 import logo from "../meowLogo.png";
 import userHome from "../user.png";
@@ -194,6 +194,10 @@ export function WatchContainer({ user, all }) {
                 }
                 setSearchPage("");
                 setContextPage(!contextPage);
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
               }}
             >
               Prev
@@ -202,7 +206,6 @@ export function WatchContainer({ user, all }) {
               value={searchPage}
               onChange={({ target }) => setSearchPage(target.value)}
               placeholder="0-230"
-              // value = {window.location.href.split("page/")[1].split("/")[0]}
             />
             <Cards.Button
               style={{ backgroundColor: "rgba(64, 64, 64, 0.5)" }}
@@ -217,6 +220,10 @@ export function WatchContainer({ user, all }) {
                 setSearchPage("");
 
                 setContextPage(!contextPage);
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
               }}
             >
               {" "}
@@ -233,6 +240,10 @@ export function WatchContainer({ user, all }) {
                 }
                 setSearchPage("");
                 setContextPage(!contextPage);
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
               }}
             >
               Next

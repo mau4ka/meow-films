@@ -28,6 +28,8 @@ import {
   SearchButton,
   Select,
   GroupFriend,
+  ButtonGo,
+  BoxGo,
 } from "./headerStyles";
 
 export default function Header({ bg = true, children, ...restProps }) {
@@ -105,6 +107,14 @@ Header.Text = function HeaderText({ children, ...restProps }) {
 
 Header.ButtonLink = function HeaderButtonLink({ children, ...restProps }) {
   return <ButtonLink {...restProps}>{children}</ButtonLink>;
+};
+
+Header.BoxGo = function HeaderBoxGo({ children, ...restProps }) {
+  return <BoxGo {...restProps}>{children}</BoxGo>;
+};
+
+Header.ButtonGo = function HeaderButtonLink({ children, ...restProps }) {
+  return <ButtonGo {...restProps}>{children}</ButtonGo>;
 };
 
 Header.Select = function HeaderButtonLink({ children, ...restProps }) {

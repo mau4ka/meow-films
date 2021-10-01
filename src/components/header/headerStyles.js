@@ -300,3 +300,25 @@ export const SearchIcon = styled.button`
     width: 16px;
   }
 `;
+
+export const ButtonGo = styled.button`
+  background-color: red;
+  color: black;
+  margin: 10px;
+  border-width: 0;
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  width: 40px;
+`;
+
+export const BoxGo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  position: sticky;
+  bottom: 20px;
+  align-items: flex-end;
+`;
