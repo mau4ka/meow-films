@@ -21,14 +21,14 @@ function App() {
       <Switch>
         <IsUserRedirect
           user={user}
-          loggedInPath={ROUTES.WATCH}
+          loggedInPath={ROUTES.WATCH + "/page/0"}
           path={ROUTES.SIGN_IN}
         >
           <SignIn />
         </IsUserRedirect>
         <IsUserRedirect
           user={user}
-          loggedInPath={ROUTES.WATCH}
+          loggedInPath={ROUTES.WATCH + "/page/0"}
           path={ROUTES.REGISTER}
         >
           <Register />
@@ -68,7 +68,7 @@ function App() {
 
         <IsUserRedirect
           user={user}
-          loggedInPath={ROUTES.WATCH}
+          loggedInPath={ROUTES.WATCH + "/page/0"}
           path={ROUTES.MAIN}
         >
           <MainPage />

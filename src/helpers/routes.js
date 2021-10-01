@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
 
 export function IsUserRedirect({ user, loggedInPath, children, ...rest }) {
   return (
@@ -36,14 +36,7 @@ export function ProtectedRoute({ user, children, ...rest }) {
         }
 
         if (!user) {
-          return (
-            <Redirect
-              to={{
-                pathname: 'signin',
-                state: { from: location },
-              }}
-            />
-          );
+          return <Redirect to="/signin" />;
         }
 
         return null;

@@ -86,6 +86,11 @@ export const Item = styled.div`
   margin: 10px;
   min-width: 250px;
   text-align: center;
+
+  @media (max-width: 560px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const Alert = styled.h2`
