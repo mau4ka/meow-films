@@ -76,7 +76,6 @@ export function WatchContainer({ user, all }) {
   } else if (all === "1") {
     numb = window.location.href.split("page/")[1].split("/")[0];
   }
-  console.log(numb);
 
   let prev = Number.parseInt(numb) - 1;
   let next = Number.parseInt(numb) + 1;

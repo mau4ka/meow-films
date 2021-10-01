@@ -9,7 +9,6 @@ export default function useContentShow(num) {
       .get(`https://api.tvmaze.com/shows/${num}`)
       .then((response) => {
         const show = response.data;
-        console.log(show);
 
         setContent(show);
       })
@@ -17,7 +16,6 @@ export default function useContentShow(num) {
         console.log(error.message);
       });
   }, []);
-  console.log(content);
 
   return content;
 }

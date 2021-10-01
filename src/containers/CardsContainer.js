@@ -4,13 +4,12 @@ import useApiSearch from "../hooks/use-api-search";
 import useApiAllShows from "../hooks/use-api-all-shows";
 import useInfoUser from "../hooks/use-getInfoUser";
 import { CardCatContainer } from "./CardCatContainer";
-import { useHistory } from "react-router";
 
 export function CardsContainer({ name, category, user, numb }) {
   const liked = useInfoUser("likes");
 
   let allShows = useApiAllShows(numb);
-  console.log(numb);
+
   let search = useApiSearch(name);
 
   useEffect(() => {

@@ -11,7 +11,6 @@ export default function useApiSearch(category) {
       .get(`https://api.tvmaze.com/search/shows?q=${category}`)
       .then((response) => {
         const shows = response.data;
-        console.log(shows);
 
         setContent(shows);
       })
@@ -19,7 +18,6 @@ export default function useApiSearch(category) {
         console.log(error.message);
       });
   }, [contextShow]);
-  console.log(content);
 
   return { content };
 }

@@ -14,26 +14,19 @@ export default function useInfoUser(context) {
     userEmail = user.email;
   }
 
-  let contextInfo
-  let setContextInfo
-  if(context === 'friends'){
+  let contextInfo;
+  let setContextInfo;
+  if (context === "friends") {
     [contextInfo, setContextInfo] = useContext(ContextFriends);
-  }else if (context === 'friendsShare'){
-    [contextInfo, setContextInfo] = ['', '']
-  }else if (context === 'likes'){
+  } else if (context === "friendsShare") {
+    [contextInfo, setContextInfo] = ["", ""];
+  } else if (context === "likes") {
     [contextInfo, setContextInfo] = useContext(ContextLikes);
-  }else if (context === 'likesShow'){
+  } else if (context === "likesShow") {
     [contextInfo, setContextInfo] = useContext(ContextLikesShow);
-  }else if (context === 'userPage'){
+  } else if (context === "userPage") {
     [contextInfo, setContextInfo] = useContext(ContextUserPage);
   }
-
-  
-
-
-
-  
-
 
   useEffect(() => {
     firebase
@@ -44,10 +37,6 @@ export default function useInfoUser(context) {
 
       .then(function (doc) {
         if (doc.exists) {
-          console.log(
-            "Document data:",
-            doc.data()
-          );
           const data = doc.data();
 
           setInfo(data);

@@ -23,9 +23,8 @@ export function FriendsContainer({ user }) {
         .get()
         .then(function (doc) {
           if (doc.exists) {
-            console.log("Document data:", doc.data(), doc.data().friends);
             if (person.email === "" || !person.email) {
-              console.log("Bad person");
+              console.log("Bad person id");
             } else if (!doc.data().friends) {
               firebase
                 .firestore()

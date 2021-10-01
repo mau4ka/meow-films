@@ -20,7 +20,6 @@ export function CardCatContainer({ user, cards, liked, search }) {
         .get()
         .then(function (doc) {
           if (doc.exists) {
-            console.log("Document data:", doc.data());
             if (el.id === "" || !el.id) {
               console.log("Bad id");
             } else if (!doc.data().likes) {
@@ -48,8 +47,6 @@ export function CardCatContainer({ user, cards, liked, search }) {
                   likes: newLikes,
                   likesId: newLikesId,
                 });
-
-              console.log("Already liked");
             } else if (Array.isArray(doc.data().likes)) {
               firebase
                 .firestore()

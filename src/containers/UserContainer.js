@@ -27,7 +27,6 @@ export default function User({ user }) {
         .get()
         .then(function (doc) {
           if (doc.exists) {
-            console.log("Document data:", doc.data());
             if (el.id === "" || !el.id || !doc.data().likes) {
               console.log("Bad info");
             } else if (doc.data().likesId.indexOf(el.id) !== -1) {
@@ -68,7 +67,6 @@ export default function User({ user }) {
         .get()
         .then(function (doc) {
           if (doc.exists) {
-            console.log("Document data:", doc.data());
             if (el.id === "" || !el.id || !doc.data().recommended) {
               console.log("Bad info");
             } else if (doc.data().recommendedId.indexOf(el.id) !== -1) {

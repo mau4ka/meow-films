@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Loading } from "../components";
 import { FirebaseContext } from "../context/firebase";
-import useContentShow from "../hooks/use-api-show";
 import { ContextLikesShow } from "../context/contextLikesShow";
 import { ShowContainer } from "../containers/ShowContainer";
 

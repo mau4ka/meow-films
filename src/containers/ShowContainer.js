@@ -39,7 +39,6 @@ export function ShowContainer({ user }) {
         .get()
         .then(function (doc) {
           if (doc.exists) {
-            console.log("Document data:", doc.data());
             if (el.id === "" || !el.id) {
               console.log("Bad id");
             } else if (!doc.data().likes) {

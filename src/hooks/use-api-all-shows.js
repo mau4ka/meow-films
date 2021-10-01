@@ -13,14 +13,11 @@ export default function useApiAllShows(num = "") {
     page = `?page=${num}`;
   }
 
-  console.log(num);
-
   useEffect(async () => {
     await axios
       .get(`https://api.tvmaze.com/shows${page}`)
       .then((response) => {
         const show = response.data;
-        console.log(show);
 
         setContent(show);
       })
@@ -28,7 +25,6 @@ export default function useApiAllShows(num = "") {
         console.log(error.message);
       });
   }, [contextPage]);
-  console.log(content);
 
   return content;
 }
