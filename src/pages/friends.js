@@ -4,11 +4,14 @@ import { Header, Loading } from "../components";
 import * as ROUTES from "../constants/routes";
 import { FirebaseContext } from "../context/firebase";
 import logo from "../meowLogo.png";
+import userHome from "../user.png";
 
 import { FriendsContainer } from "../containers/FriendsContainer";
 import { ContextFriends } from "../context/contextFriends";
+import { useHistory } from "react-router";
 
 export default function FriendsPage() {
+  let history = useHistory();
   const [contextFriends, setContextFriends] = useState(null);
 
   const { firebase } = useContext(FirebaseContext);
@@ -60,6 +63,11 @@ export default function FriendsPage() {
                         </Header.Group>
                       </Header.Dropdown>
                     </Header.Profile>
+                    <Header.PictureHome
+                      src={userHome}
+                      alt="home"
+                      onClick={() => history.push(ROUTES.USER)}
+                    />
                   </Header.Group>
                 </Header.Frame>
               </Header>

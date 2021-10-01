@@ -23,7 +23,6 @@ export function WatchContainer({ user, all }) {
     "Science-Fiction",
     "Music",
     "Family",
-    "Nature",
     "Anime",
     "Adventure",
     "Horror",
@@ -33,7 +32,6 @@ export function WatchContainer({ user, all }) {
     "Fantasy",
     "Action",
     "Supernatural",
-    "Food",
     "Legal",
     "Sports",
   ];
@@ -67,6 +65,7 @@ export function WatchContainer({ user, all }) {
   window.addEventListener("popstate", (event) => {
     setContextPage(!contextPage);
     setContextShow(!contextShow);
+    setSearchPage("");
   });
 
   const { firebase } = useContext(FirebaseContext);
@@ -81,6 +80,8 @@ export function WatchContainer({ user, all }) {
 
   let prev = Number.parseInt(numb) - 1;
   let next = Number.parseInt(numb) + 1;
+
+  const [searchPage, setSearchPage] = useState("");
 
   return (
     <>
@@ -114,26 +115,27 @@ export function WatchContainer({ user, all }) {
               />
             </Header.Group>
           </Header.Frame>
-
-          <Header.Feature>
-            <Header.FeatureCallOut>
-              Watch Promises Neverland
-            </Header.FeatureCallOut>
-            <Header.Text>
-              The Promised Neverland follows three protagonists, Emma, Norman,
-              and Ray, along with a cast of orphans who live together. Their
-              lives have been full of joy, that is until the protagonists learn
-              the orphanage is really a farm where children are raised and given
-              to demons to be eaten. Learning that they have a limited amount of
-              time on their side, the three work out a plan to escape with the
-              rest of the children.
-            </Header.Text>
-            <Header.PlayButton
-              onClick={() => history.push(`${ROUTES.SHOW}/40147`)}
-            >
-              More info
-            </Header.PlayButton>
-          </Header.Feature>
+          {category === null && search === null ? (
+            <Header.Feature>
+              <Header.FeatureCallOut>
+                Watch Promises Neverland
+              </Header.FeatureCallOut>
+              <Header.Text>
+                The Promised Neverland follows three protagonists, Emma, Norman,
+                and Ray, along with a cast of orphans who live together. Their
+                lives have been full of joy, that is until the protagonists
+                learn the orphanage is really a farm where children are raised
+                and given to demons to be eaten. Learning that they have a
+                limited amount of time on their side, the three work out a plan
+                to escape with the rest of the children.
+              </Header.Text>
+              <Header.PlayButton
+                onClick={() => history.push(`${ROUTES.SHOW}/40147`)}
+              >
+                More info
+              </Header.PlayButton>
+            </Header.Feature>
+          ) : null}
         </Header>
 
         {search !== null ? (
@@ -149,8 +151,10 @@ export function WatchContainer({ user, all }) {
 
         {search === null || search === "null" ? (
           <Header.Select
+            value={
+              window.location.href.split("page/")[1].split("/")[2] || "null"
+            }
             onChange={({ target }) => {
-              // setCategory(target.value);
               setContextPage(!contextPage);
               if (target.value === "null") {
                 history.push(ROUTES.WATCH + "/");
@@ -177,36 +181,65 @@ export function WatchContainer({ user, all }) {
           all={all}
           numb={numb}
         />
-        <Cards.Group>
-          <Cards.Button
-            onClick={() => {
-              if (category) {
-                history.push(
-                  ROUTES.WATCH + "/page/" + prev + "/cat/" + category
-                );
-              } else {
-                history.push(ROUTES.WATCH + "/page/" + prev);
-              }
-              setContextPage(!contextPage);
-            }}
-          >
-            Prev
-          </Cards.Button>
-          <Cards.Button
-            onClick={() => {
-              if (category) {
-                history.push(
-                  ROUTES.WATCH + "/page/" + next + "/cat/" + category
-                );
-              } else {
-                history.push(ROUTES.WATCH + "/page/" + next);
-              }
-              setContextPage(!contextPage);
-            }}
-          >
-            Next
-          </Cards.Button>
-        </Cards.Group>
+
+        {search === null ? (
+          <Cards.Group>
+            <Cards.Button
+              onClick={() => {
+                if (category) {
+                  history.push(
+                    ROUTES.WATCH + "/page/" + prev + "/cat/" + category
+                  );
+                } else {
+                  history.push(ROUTES.WATCH + "/page/" + prev);
+                }
+                setSearchPage("");
+                setContextPage(!contextPage);
+              }}
+            >
+              Prev
+            </Cards.Button>
+            <Cards.Input
+              value={searchPage}
+              onChange={({ target }) => setSearchPage(target.value)}
+              placeholder="0-230"
+              // value = {window.location.href.split("page/")[1].split("/")[0]}
+            />
+            <Cards.Button
+              style={{ backgroundColor: "rgba(64, 64, 64, 0.5)" }}
+              onClick={() => {
+                if (category) {
+                  history.push(
+                    ROUTES.WATCH + "/page/" + searchPage + "/cat/" + category
+                  );
+                } else {
+                  history.push(ROUTES.WATCH + "/page/" + searchPage);
+                }
+                setSearchPage("");
+
+                setContextPage(!contextPage);
+              }}
+            >
+              {" "}
+              go
+            </Cards.Button>
+            <Cards.Button
+              onClick={() => {
+                if (category) {
+                  history.push(
+                    ROUTES.WATCH + "/page/" + next + "/cat/" + category
+                  );
+                } else {
+                  history.push(ROUTES.WATCH + "/page/" + next);
+                }
+                setSearchPage("");
+                setContextPage(!contextPage);
+              }}
+            >
+              Next
+            </Cards.Button>
+          </Cards.Group>
+        ) : null}
 
         <FooterContainer />
       </ContextShow.Provider>

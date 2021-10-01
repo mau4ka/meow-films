@@ -14,17 +14,12 @@ export const Background = styled.div`
     url(${({ src }) =>
         src ? `../images/misc/${src}` : "../images/misc/cat-header-bg.png"})
       top left / cover no-repeat;
-
-  @media (max-width: 1100px) {
-    ${({ dontShowOnSmallViewPort }) =>
-      dontShowOnSmallViewPort && `background: none;`}
-  }
 `;
 
 export const Container = styled.div`
   display: flex;
   margin: 0 56px;
-  height: 100px;
+  height: 150px;
   justify-content: space-between;
   align-items: center;
 
@@ -57,6 +52,11 @@ export const Link = styled.p`
 export const Group = styled.div`
   display: flex;
   align-items: center;
+`;
+
+export const GroupFriend = styled.div`
+  text-align: center;
+  padding: 30px;
 `;
 
 export const ButtonLink = styled(ReachRouterLink)`
@@ -213,7 +213,7 @@ export const PlayButton = styled.button`
 export const Button = styled.button`
   background-color: red;
   color: black;
-  margin: 50px 10px 0 50px;
+  margin: 50px 10px 0 10px;
   border-width: 0;
   padding: 10px 20px;
   border-radius: 5px;
@@ -280,7 +280,7 @@ export const Select = styled.select`
   height: 30px;
   font-size: 14px;
   border-radius: 4px;
-  margin: 10px;
+  margin: 20px 50px;
 `;
 
 export const SearchIcon = styled.button`

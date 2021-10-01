@@ -2,6 +2,7 @@ import React from "react";
 
 import no_image from "../../no_image.png";
 import * as ROUTES from "../../constants/routes";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import {
   Container,
@@ -17,6 +18,7 @@ import {
   GroupRow,
   Button,
   Box,
+  Input,
 } from "./cardStyles";
 
 import { useHistory } from "react-router";
@@ -65,8 +67,22 @@ Cards.Item = function CardsItem({ item, children, ...restProps }) {
   return <Item {...restProps}>{children}</Item>;
 };
 
+let imageStyle = {
+  border: "0",
+  width: "100%",
+  maxWidth: "18rem",
+  cursor: "pointer",
+  height: "18rem",
+  padding: "0",
+  margin: "0",
+};
+
 Cards.Image = function CardsImage({ ...restProps }) {
   return <Image {...restProps} />;
+};
+
+Cards.Input = function CardsInput({ ...restProps }) {
+  return <Input {...restProps} />;
 };
 
 Cards.Heart = function CardsImage({ ...restProps }) {
@@ -79,24 +95,31 @@ Cards.Button = function CardsButton({ children, ...restProps }) {
 
 Cards.OneItem = function CardsImage({ children, item, liked }) {
   const history = useHistory();
+  let shortName = item.name.substr(0, 25);
   return (
     <Cards.Item>
       {!item.image || !item.image.medium ? (
-        <Cards.Image
+        <LazyLoadImage
           src={no_image}
           alt="no-image"
           onClick={() => history.push(`${ROUTES.SHOW}/${item.show.id}`)}
+          style={imageStyle}
         />
       ) : (
-        <Cards.Image
+        <LazyLoadImage
           src={item.image.original}
           alt={item.name}
           onClick={() => history.push(`${ROUTES.SHOW}/${item.id}`)}
+          style={imageStyle}
         />
       )}
       <Cards.GroupSpace>
         <Cards.Column>
-          <Cards.SubTitle>{item.name}</Cards.SubTitle>
+          {item.name.length <= shortName.length ? (
+            <Cards.SubTitle>{item.name}</Cards.SubTitle>
+          ) : (
+            <Cards.SubTitle title={item.name}>{shortName}...</Cards.SubTitle>
+          )}
           <Cards.Text>Language: {item.language}</Cards.Text>
           <Cards.Text>Status: {item.status}</Cards.Text>
         </Cards.Column>

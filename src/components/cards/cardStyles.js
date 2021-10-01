@@ -95,6 +95,7 @@ export const Text = styled.p`
 export const Image = styled.img`
   border: 0;
   width: 100%;
+  max-width: 18rem;
   cursor: pointer;
   height: 18rem;
   padding: 0;
@@ -110,13 +111,30 @@ export const Button = styled.button`
   border-radius: 5px;
   font-weight: bold;
   font-size: 20px;
-  margin: 20px 0 0 20px;
+  margin: 20px 20px 0 20px;
   cursor: pointer;
   transition: background-color 0.5s ease;
+
+  @media (max-width: 450px) {
+    margin: 20px 5px 0 5px;
+  }
 `;
 
 export const Heart = styled.img`
   border: 0;
   cursor: pointer;
   margin: 0;
+`;
+
+export const Input = styled.input`
+  background-color: rgba(64, 64, 64, 0.5);
+  color: white;
+  border: 1px solid white;
+  transition: width 0.5s;
+  height: 50px;
+  font-size: 14px;
+  border-radius: 4px;
+  padding: 5px;
+  width: 50px;
+  margin: 20px 0 0 10px;
 `;

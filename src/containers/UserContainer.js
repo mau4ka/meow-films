@@ -131,9 +131,12 @@ export default function User({ user }) {
           </Header.Group>
         </Header.Frame>
       </Header>
-      <Header.Button onClick={() => history.push(ROUTES.FRIENDS)}>
-        Go to friend list
-      </Header.Button>
+      <Header.GroupFriend>
+        <Header.Button onClick={() => history.push(ROUTES.FRIENDS)}>
+          Go to friend list
+        </Header.Button>
+      </Header.GroupFriend>
+
       <Cards.Box>
         <Cards.Title>Liked</Cards.Title>
         {info && info.likes && info.likes.length !== 0 ? (

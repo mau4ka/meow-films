@@ -27,6 +27,7 @@ import {
   SearchForm,
   SearchButton,
   Select,
+  GroupFriend,
 } from "./headerStyles";
 
 export default function Header({ bg = true, children, ...restProps }) {
@@ -45,6 +46,10 @@ Header.Frame = function HeaderFrame({ children, ...restProps }) {
 
 Header.Group = function HeaderGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
+};
+
+Header.GroupFriend = function HeaderGroupFriend({ children, ...restProps }) {
+  return <GroupFriend {...restProps}>{children}</GroupFriend>;
 };
 
 Header.Logo = function HeaderLogo({ to, ...restProps }) {

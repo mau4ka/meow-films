@@ -50,7 +50,7 @@ export function CardsContainer({ name, category, user, numb }) {
         </Cards>
       ) : (
         <Cards>
-          <Cards.Title>Find by name: {name}</Cards.Title>
+          <Cards.Title>Find by name: {decodeURI(name)}</Cards.Title>
 
           <Cards.Group>
             {search.content && search.content.length !== 0 ? (
