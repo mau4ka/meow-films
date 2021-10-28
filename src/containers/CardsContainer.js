@@ -6,6 +6,8 @@ import useInfoUser from "../hooks/use-getInfoUser";
 import { CardCatContainer } from "./CardCatContainer";
 
 export function CardsContainer({ name, category, user, numb }) {
+  const [loading, setLoading] = useState(true);
+
   const liked = useInfoUser("likes");
 
   let allShows = useApiAllShows(numb);
@@ -18,22 +20,20 @@ export function CardsContainer({ name, category, user, numb }) {
     }, 1000);
   }, []);
 
-  const [loading, setLoading] = useState(true);
-
   return (
     <>
-      {name === null ? (
+      {!name ? (
         <Cards>
           <Cards.Title>{name}</Cards.Title>
           <Cards.Group>
-            {allShows && (category === null || category === "null") ? (
+            {allShows && (!category || category === "default") ? (
               <CardCatContainer
                 user={user}
                 cards={allShows}
                 liked={liked}
                 search="false"
               />
-            ) : allShows && category !== null ? (
+            ) : allShows && category ? (
               <CardCatContainer
                 user={user}
                 cards={allShows.filter((item) =>
@@ -42,9 +42,7 @@ export function CardsContainer({ name, category, user, numb }) {
                 liked={liked}
                 search="false"
               />
-            ) : (
-              <p></p>
-            )}
+            ) : null}
           </Cards.Group>
         </Cards>
       ) : (

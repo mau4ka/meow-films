@@ -7,9 +7,9 @@ import useInfoUser from "../hooks/use-getInfoUser";
 export function ShareToFriendsContainer({ show }) {
   let friendsList = useInfoUser("friendsShare");
   const { firebase } = useContext(FirebaseContext);
-  const handleShare = (who) => {
-    if (show && who) {
-      firebase
+  const handleShare = async (who) => {
+    try {
+      await firebase
         .firestore()
         .collection("userPages")
         .doc(who)
@@ -26,7 +26,7 @@ export function ShareToFriendsContainer({ show }) {
                   recommendedId: [show.id],
                 });
             } else if (doc.data().recommendedId.indexOf(show.id) !== -1) {
-              console.log("This user know about this film!");
+              return false;
             } else if (
               Array.isArray(doc.data().recommended) &&
               Array.isArray(doc.data().recommendedId)
@@ -60,9 +60,11 @@ export function ShareToFriendsContainer({ show }) {
               });
           }
         })
-        .catch(function (error) {
-          console.log("Error getting document:", error);
+        .catch((error) => {
+          throw error;
         });
+    } catch (error) {
+      console.log(error)
     }
   };
 
@@ -76,9 +78,7 @@ export function ShareToFriendsContainer({ show }) {
 
   return (
     <>
-      {friendsList &&
-      friendsList.friends &&
-      friendsList.friends.length !== 0 ? (
+      {friendsList && friendsList.friends && friendsList.friends.length ? (
         <>
           <AllUsers.BigTitle>Share to your friends</AllUsers.BigTitle>
           <AllUsers.Box display={displayAl}>

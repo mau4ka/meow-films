@@ -144,7 +144,7 @@ Header.Search = function HeaderSearch({ ...restProps }) {
           active={searchActive}
           onClick={(e) => {
             e.preventDefault();
-            myHistory.push(ROUTES.WATCH + "/search/" + searchTerm);
+            myHistory.push(`${ROUTES.WATCH}/search/${searchTerm}`);
             setContextShow(!contextShow);
           }}
         >

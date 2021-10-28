@@ -1,4 +1,4 @@
-export { default as BigBlocks } from "./bigBlocks/BigBlocks";
+export { default as MainPageCats } from "./mainPageCats/mainPageCats";
 export { default as Footer } from "./footer/Footer";
 export { default as Questions } from "./questions/Questions";
 export { default as FastRegForm } from "./fastRegForm/FastRegForm";

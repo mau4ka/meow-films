@@ -28,7 +28,7 @@ export default function User({ user }) {
         .then(function (doc) {
           if (doc.exists) {
             if (el.id === "" || !el.id || !doc.data().likes) {
-              console.log("Bad info");
+              return false;
             } else if (doc.data().likesId.indexOf(el.id) !== -1) {
               let newLikes = doc.data().likes.filter(function (number) {
                 return number.id !== el.id;
@@ -45,10 +45,10 @@ export default function User({ user }) {
                   likesId: newLikesId,
                 });
             } else {
-              console.log("Bad info");
+              return false;
             }
           } else {
-            console.log("No info about user");
+            return false;
           }
         })
         .catch(function (error) {
@@ -68,7 +68,7 @@ export default function User({ user }) {
         .then(function (doc) {
           if (doc.exists) {
             if (el.id === "" || !el.id || !doc.data().recommended) {
-              console.log("Bad info");
+              return false;
             } else if (doc.data().recommendedId.indexOf(el.id) !== -1) {
               let newRec = doc.data().recommended.filter(function (number) {
                 return number.id !== el.id;
@@ -85,14 +85,14 @@ export default function User({ user }) {
                   recommendedId: newRecId,
                 });
             } else {
-              console.log("Bad info");
+              return false;
             }
           } else {
-            console.log("No info about user");
+            return false;
           }
         })
         .catch(function (error) {
-          console.log("Error getting document:", error);
+          console.log(error)
         });
     }
   };
@@ -157,7 +157,7 @@ export default function User({ user }) {
             </Cards.GroupRow>
           </Cards>
         ) : (
-          <Cards.Title style={{ color: "red" }}>No liked shows</Cards.Title>
+          <Cards.Title color="red">No liked shows</Cards.Title>
         )}
         <Cards.Title>Recommended by friends</Cards.Title>
         {info && info.recommended && info.recommended.length !== 0 ? (

@@ -12,7 +12,7 @@ export function CardCatContainer({ user, cards, liked, search }) {
 
   let setLike = async (el) => {
     let userEmail = user.email;
-    if (user.email && el) {
+    try {
       await firebase
         .firestore()
         .collection("userPages")
@@ -21,7 +21,7 @@ export function CardCatContainer({ user, cards, liked, search }) {
         .then(function (doc) {
           if (doc.exists) {
             if (el.id === "" || !el.id) {
-              console.log("Bad id");
+              return null;
             } else if (!doc.data().likes) {
               firebase
                 .firestore()
@@ -32,12 +32,12 @@ export function CardCatContainer({ user, cards, liked, search }) {
                   likesId: [el.id],
                 });
             } else if (doc.data().likesId.indexOf(el.id) !== -1) {
-              let newLikes = doc.data().likes.filter(function (number) {
-                return number.id !== el.id;
-              });
-              let newLikesId = doc.data().likesId.filter(function (number) {
-                return number !== el.id;
-              });
+              let newLikes = doc
+                .data()
+                .likes.filter((likeEl) => likeEl.id !== el.id);
+              let newLikesId = doc
+                .data()
+                .likesId.filter((likeEl) => likeEl !== el.id);
 
               firebase
                 .firestore()
@@ -77,10 +77,17 @@ export function CardCatContainer({ user, cards, liked, search }) {
               });
           }
         })
-        .catch(function (error) {
-          console.log("Error getting document:", error);
+        .catch((error) => {
+          throw error;
         });
+    } catch (error) {
+      console.log(error)
     }
+  };
+
+  let onClickHandle = async (item) => {
+    await setLike(item);
+    setContextLikes(!contextLikes);
   };
 
   return (
@@ -93,12 +100,9 @@ export function CardCatContainer({ user, cards, liked, search }) {
             cards.map((item) => (
               <Cards.OneItem item={item} liked={liked} key={item.id}>
                 <Cards.Heart
-                  onClick={async (el) => {
-                    await setLike(item);
-                    setContextLikes(!contextLikes);
-                  }}
+                  onClick={() => onClickHandle(item)}
                   src={
-                    liked !== null &&
+                    liked &&
                     liked.likesId &&
                     liked.likesId.indexOf(item.id) !== -1
                       ? heartLiked
@@ -113,12 +117,9 @@ export function CardCatContainer({ user, cards, liked, search }) {
           cards.map((item) => (
             <Cards.OneItem item={item.show} liked={liked} key={item.show.id}>
               <Cards.Heart
-                onClick={async (el) => {
-                  await setLike(item.show);
-                  setContextLikes(!contextLikes);
-                }}
+                onClick={() => onClickHandle(item.show)}
                 src={
-                  liked !== null &&
+                  liked &&
                   liked.likesId &&
                   liked.likesId.indexOf(item.show.id) !== -1
                     ? heartLiked

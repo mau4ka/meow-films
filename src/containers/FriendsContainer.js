@@ -23,8 +23,8 @@ export function FriendsContainer({ user }) {
         .get()
         .then(function (doc) {
           if (doc.exists) {
-            if (person.email === "" || !person.email) {
-              console.log("Bad person id");
+            if (!person.email) {
+              return false;
             } else if (!doc.data().friends) {
               firebase
                 .firestore()
@@ -86,18 +86,22 @@ export function FriendsContainer({ user }) {
           }
         })
         .catch(function (error) {
-          console.log("Error getting document:", error);
+          console.log(error);
         });
     }
   };
+
+  let clickHandler = async (el) => {
+    await setFriend(el);
+    setContextFriends(!contextFriends);
+  };
+
   const allUsers = useGetAllUsers();
 
   return (
     <>
       <AllUsers.BigTitle>Your Friends</AllUsers.BigTitle>
-      {friendsList &&
-      friendsList.friends &&
-      friendsList.friends.length !== 0 ? (
+      {friendsList && friendsList.friends && friendsList.friends.length ? (
         <AllUsers>
           <AllUsers.GroupRow wrap="nowrap" overflow="auto" justify="start">
             {friendsList.friends.map((el) => (
@@ -105,18 +109,13 @@ export function FriendsContainer({ user }) {
                 {el.photo <= 5 ? (
                   <AllUsers.Image src={`/images/users/${el.photo}.jpg`} />
                 ) : (
-                  <AllUsers.Image src={`/images/users/1.jpg`} />
+                  <AllUsers.Image src={"/images/users/1.jpg"} />
                 )}
 
                 <AllUsers.Title>{el.name}</AllUsers.Title>
                 <AllUsers.Text>{el.email}</AllUsers.Text>
 
-                <AllUsers.ButtonDelete
-                  onClick={async () => {
-                    await setFriend(el);
-                    setContextFriends(!contextFriends);
-                  }}
-                >
+                <AllUsers.ButtonDelete onClick={() => clickHandler(el)}>
                   Delete friend
                 </AllUsers.ButtonDelete>
               </AllUsers.Item>
@@ -145,19 +144,14 @@ export function FriendsContainer({ user }) {
                     {el.photo <= 5 ? (
                       <AllUsers.Image src={`/images/users/${el.photo}.jpg`} />
                     ) : (
-                      <AllUsers.Image src={`/images/users/1.jpg`} />
+                      <AllUsers.Image src={"/images/users/1.jpg"} />
                     )}
 
                     <AllUsers.Group>
                       <AllUsers.Title>{el.name}</AllUsers.Title>
                       <AllUsers.Text>{el.email}</AllUsers.Text>
                     </AllUsers.Group>
-                    <AllUsers.ButtonAdd
-                      onClick={async () => {
-                        await setFriend(el);
-                        setContextFriends(!contextFriends);
-                      }}
-                    >
+                    <AllUsers.ButtonAdd onClick={() => clickHandler(el)}>
                       Add friend
                     </AllUsers.ButtonAdd>
                   </AllUsers.Item>

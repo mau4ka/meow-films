@@ -11,10 +11,10 @@ export function QuestionsContainer() {
     <Questions>
       <Questions.Title>Frequently Asked Questions</Questions.Title>
       <Questions.Frame>
-        {questionsData.map((item) => (
-          <Questions.Item key={item.id}>
-            <Questions.Header>{item.header}</Questions.Header>
-            <Questions.Body>{item.body}</Questions.Body>
+        {questionsData.map((questionInfo) => (
+          <Questions.Item key={questionInfo.id}>
+            <Questions.Header>{questionInfo.header}</Questions.Header>
+            <Questions.Body>{questionInfo.body}</Questions.Body>
           </Questions.Item>
         ))}
       </Questions.Frame>

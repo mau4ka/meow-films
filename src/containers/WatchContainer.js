@@ -51,7 +51,7 @@ export function WatchContainer({ user, all }) {
 
       search = null;
     } else {
-      history.push(ROUTES.WATCH + "/page/0");
+      history.push(`${ROUTES.WATCH}/page/0`);
     }
   } else if (window.location.href.split("watch/")[1].split("/")[0] === "page") {
     let linkPage = Number.parseInt(
@@ -164,7 +164,7 @@ export function WatchContainer({ user, all }) {
               }
             }}
           >
-            <option value="null">All</option>
+            <option value="default">All</option>
             {categories.map((el) => (
               <option key={el} value={el}>
                 {el}

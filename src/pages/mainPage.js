@@ -1,11 +1,11 @@
 import React from "react";
 import { HeaderText, FastRegForm } from "../components";
-import { BigBlocksContainer } from "../containers/BigBlocksContainer";
 import { FooterContainer } from "../containers/FooterContainer";
 import { HeaderContainer } from "../containers/HeaderContainer";
 import { QuestionsContainer } from "../containers/QuestionsContainer";
 import * as ROUTES from "../constants/routes";
 import { useHistory } from "react-router";
+import { MainPageCatsContainer } from "../containers/MainPageCatsContainer";
 
 export default function MainPage() {
   const history = useHistory();
@@ -28,7 +28,7 @@ export default function MainPage() {
           </FastRegForm>
         </HeaderText>
       </HeaderContainer>
-      <BigBlocksContainer />
+      <MainPageCatsContainer />
       <QuestionsContainer />
       <FooterContainer />
     </>

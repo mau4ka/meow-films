@@ -24,14 +24,11 @@ export function ShowContainer({ user }) {
 
   const { firebase } = useContext(FirebaseContext);
 
-  let userEmail = null;
-  if (user) {
-    userEmail = user.email;
-  }
+  let userEmail = user && user.email;
 
   let setLike = async (el) => {
     let userEmail = user.email;
-    if (user.email && el) {
+    try{
       await firebase
         .firestore()
         .collection("userPages")
@@ -40,7 +37,7 @@ export function ShowContainer({ user }) {
         .then(function (doc) {
           if (doc.exists) {
             if (el.id === "" || !el.id) {
-              console.log("Bad id");
+              return false;
             } else if (!doc.data().likes) {
               firebase
                 .firestore()
@@ -96,10 +93,12 @@ export function ShowContainer({ user }) {
               });
           }
         })
-        .catch(function (error) {
-          console.log("Error getting document:", error);
+        .catch((error) => {
+          throw error
         });
-    }
+      }catch(error){
+        console.log(error)
+      }
   };
 
   return (
@@ -133,7 +132,7 @@ export function ShowContainer({ user }) {
         </Header.Frame>
       </Header>
       <Show.Box>
-        {show.length !== 0 ? (
+        {show.id ? (
           <Show>
             {!show.image || !show.image.original ? (
               <Show.Image src={no_image} alt="no-image" />
